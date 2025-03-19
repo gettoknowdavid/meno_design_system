@@ -6,7 +6,7 @@ class Insets {
   Insets._();
 
   /// Micro inset of 4.0
-  static const xxs = 4.0;
+  static const xs = 4.0;
 
   /// Small inset of 8.0
   static const sm = 8.0;

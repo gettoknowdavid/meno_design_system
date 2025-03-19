@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meno_design_system/src/core/colors/meno_colors.dart';
+import 'package:meno_design_system/meno_design_system.dart';
 
 /// {@template meno_color_scheme}
 /// Theme class which provides configuration of a custom [ColorScheme]
@@ -70,6 +70,18 @@ class MenoColorScheme extends ThemeExtension<MenoColorScheme> {
     required this.notificationLight,
     required this.notificationLighter,
   });
+
+  /// {@macro meno_color_scheme}
+  factory MenoColorScheme.$default(Brightness brightness) {
+    if (brightness == Brightness.light) return MenoColorScheme.light();
+    return MenoColorScheme.dark();
+  }
+
+    /// {@macro meno_button_theme}
+  factory MenoColorScheme.of(BuildContext context) {
+    final theme = Theme.of(context).extension<MenoTheme>()!;
+    return theme.colors as MenoColorScheme;
+  }
 
   /// {@macro meno_color_scheme}
   factory MenoColorScheme.light() {
@@ -614,53 +626,135 @@ class MenoColorScheme extends ThemeExtension<MenoColorScheme> {
     );
   }
 
+  /// Resolves the appropriate value based on the theme brightness.
+  ///
+  /// This method selects either the light theme value or the dark theme value
+  /// based on whether the theme brightness is light or dark.
+  ///
+  /// - [brightness]: [Brightness] of the app.
+  /// - [lightValue]: The value to use for light themes.
+  /// - [darkValue]: The value to use for dark themes.
+  ///
+  /// Returns the appropriate value for the current theme brightness.
+  static T _resolve<T>(Brightness brightness, T lightValue, T darkValue) {
+    return brightness == Brightness.light ? lightValue : darkValue;
+  }
+
   /// Retrieve the light Material [ColorScheme] for [ThemeData]
-  ColorScheme get lightMaterialColorScheme {
+  ColorScheme get materialColorScheme {
     return ColorScheme(
-      brightness: Brightness.light,
-      primary: MenoColors.purple,
-      onPrimary: MenoColors.neutral.shade50,
-      primaryContainer: MenoColors.purple.shade100,
-      onPrimaryContainer: MenoColors.purple.shade700,
-      secondary: MenoColors.neutral.shade900,
-      onSecondary: MenoColors.neutral.shade50,
-      secondaryContainer: MenoColors.neutral.shade200,
-      onSecondaryContainer: MenoColors.neutral[950],
-      tertiary: MenoColors.yellow,
-      onTertiary: MenoColors.yellow.shade900,
-      tertiaryContainer: MenoColors.blue.shade200,
-      onTertiaryContainer: MenoColors.blue.shade900,
-      error: MenoColors.red,
-      onError: MenoColors.neutral.shade50,
-      errorContainer: MenoColors.red.shade100,
-      onErrorContainer: MenoColors.red.shade800,
-      surface: MenoColors.neutral[0]!,
-      onSurface: MenoColors.neutral[950]!,
+      brightness: brightness,
+      primary: _resolve(
+        brightness,
+        MenoColors.purple,
+        MenoColors.purple.shade300,
+      ),
+      onPrimary: _resolve(
+        brightness,
+        MenoColors.neutral.shade50,
+        MenoColors.purple,
+      ),
+      primaryContainer: _resolve(
+        brightness,
+        MenoColors.purple.shade100,
+        MenoColors.purple.shade400,
+      ),
+      onPrimaryContainer: _resolve(
+        brightness,
+        MenoColors.purple.shade700,
+        MenoColors.purple.shade50,
+      ),
+      secondary: _resolve(
+        brightness,
+        MenoColors.neutral.shade900,
+        MenoColors.neutral.shade300,
+      ),
+      onSecondary: _resolve(
+        brightness,
+        MenoColors.neutral.shade50,
+        MenoColors.neutral.shade900,
+      ),
+      secondaryContainer: _resolve(
+        brightness,
+        MenoColors.neutral.shade200,
+        MenoColors.neutral.shade900,
+      ),
+      onSecondaryContainer: _resolve(
+        brightness,
+        MenoColors.neutral[950],
+        MenoColors.neutral.shade100,
+      ),
+      tertiary: _resolve(
+        brightness,
+        MenoColors.yellow,
+        MenoColors.yellow.shade100,
+      ),
+      onTertiary: _resolve(
+        brightness,
+        MenoColors.yellow.shade900,
+        MenoColors.yellow.shade900,
+      ),
+      tertiaryContainer: _resolve(
+        brightness,
+        MenoColors.blue.shade200,
+        MenoColors.blue.shade800,
+      ),
+      onTertiaryContainer: _resolve(
+        brightness,
+        MenoColors.blue.shade900,
+        MenoColors.blue.shade50,
+      ),
+      error: _resolve(brightness, MenoColors.red, MenoColors.red.shade100),
+      onError: _resolve(
+        brightness,
+        MenoColors.neutral.shade50,
+        MenoColors.red.shade900,
+      ),
+      errorContainer: _resolve(
+        brightness,
+        MenoColors.red.shade100,
+        MenoColors.red.shade800,
+      ),
+      onErrorContainer: _resolve(
+        brightness,
+        MenoColors.red.shade800,
+        MenoColors.red.shade50,
+      ),
+      surface: _resolve(
+        brightness,
+        MenoColors.neutral[0]!,
+        MenoColors.purple[950]!,
+      ),
+      onSurface: _resolve(
+        brightness,
+        MenoColors.neutral[950]!,
+        MenoColors.neutral.shade50,
+      ),
     );
   }
 
   /// Retrieve the dark Material [ColorScheme] for [ThemeData]
-  ColorScheme get darkMaterialColorScheme {
-    return ColorScheme(
-      brightness: Brightness.light,
-      primary: MenoColors.purple.shade300,
-      onPrimary: MenoColors.purple,
-      primaryContainer: MenoColors.purple.shade400,
-      onPrimaryContainer: MenoColors.purple.shade50,
-      secondary: MenoColors.neutral.shade300,
-      onSecondary: MenoColors.neutral.shade900,
-      secondaryContainer: MenoColors.neutral.shade900,
-      onSecondaryContainer: MenoColors.neutral.shade100,
-      tertiary: MenoColors.yellow.shade100,
-      onTertiary: MenoColors.yellow.shade900,
-      tertiaryContainer: MenoColors.blue.shade800,
-      onTertiaryContainer: MenoColors.blue.shade50,
-      error: MenoColors.red.shade100,
-      onError: MenoColors.red.shade900,
-      errorContainer: MenoColors.red.shade800,
-      onErrorContainer: MenoColors.red.shade50,
-      surface: MenoColors.purple[950]!,
-      onSurface: MenoColors.neutral.shade50,
-    );
-  }
+  // ColorScheme get darkMaterialColorScheme {
+  //   return ColorScheme(
+  //     brightness: brightness,
+  // primary: MenoColors.purple.shade300,
+  // onPrimary: MenoColors.purple,
+  // primaryContainer: MenoColors.purple.shade400,
+  // onPrimaryContainer: MenoColors.purple.shade50,
+  // secondary: MenoColors.neutral.shade300,
+  // onSecondary: MenoColors.neutral.shade900,
+  // secondaryContainer: MenoColors.neutral.shade900,
+  // onSecondaryContainer: MenoColors.neutral.shade100,
+  // tertiary: MenoColors.yellow.shade100,
+  // onTertiary: MenoColors.yellow.shade900,
+  // tertiaryContainer: MenoColors.blue.shade800,
+  // onTertiaryContainer: MenoColors.blue.shade50,
+  // error: MenoColors.red.shade100,
+  // onError: MenoColors.red.shade900,
+  // errorContainer: MenoColors.red.shade800,
+  // onErrorContainer: MenoColors.red.shade50,
+  // surface: MenoColors.purple[950]!,
+  // onSurface: MenoColors.neutral.shade50,
+  // );
+  // }
 }

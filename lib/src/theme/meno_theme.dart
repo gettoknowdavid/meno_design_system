@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meno_design_system/src/core/colors/meno_color_scheme.dart';
-import 'package:meno_design_system/src/core/typography/meno_text_theme.dart';
+import 'package:meno_design_system/meno_design_system.dart';
 
 /// {@template meno_theme}
 /// Configuration class which collects all Themes of app together and provides
@@ -8,29 +7,70 @@ import 'package:meno_design_system/src/core/typography/meno_text_theme.dart';
 /// {@endtemplate}
 class MenoTheme extends ThemeExtension<MenoTheme> {
   /// {@macro meno_theme}
-  const MenoTheme({required this.colors, required this.textTheme});
+  const MenoTheme({
+    required this.colors,
+    required this.textTheme,
+    required this.buttonTheme,
+  });
 
-  /// Private method to generate raw theme data based on brightness.
-  static ThemeData get light {
-    final colors = MenoColorScheme.light();
-    final colorScheme = colors.lightMaterialColorScheme;
-    final textTheme = MenoTextTheme.$default(colorScheme);
-    final themeExtension = MenoTheme(colors: colors, textTheme: textTheme);
-    return ThemeData(
-      colorScheme: colors.lightMaterialColorScheme,
-      extensions: [themeExtension],
+  /// Retrieves the [MenoTheme] extension from the closest [Theme] instance
+  /// that encloses the given [context].
+  ///
+  /// This method searches for the nearest [Theme] widget in the widget tree
+  /// and returns the [MenoTheme] extension if it exists. If no
+  /// [MenoTheme] extension is found, this method returns null.
+  ///
+  /// The [MenoTheme] extension must be added to the [ThemeData.extensions]
+  /// in your theme configuration to be accessible using this method.
+  ///
+  /// Example usage:
+  /// ```dart
+  /// final MenoTheme = MenoTheme.of(context);
+  /// ```
+  ///
+  /// - [context]: The build context from which to retrieve the [MenoTheme]
+  /// extension.
+  ///
+  /// Returns the [MenoTheme] extension if found, or null if no
+  /// [MenoTheme] extension is available in the closest [Theme] instance.
+  factory MenoTheme.of(BuildContext context) {
+    final brightness = MediaQuery.platformBrightnessOf(context);
+    final defaultTheme = MenoTheme.$default(brightness);
+    return Theme.of(context).extension<MenoTheme>() ?? defaultTheme;
+  }
+
+  /// {@macro meno_theme}
+  factory MenoTheme.$default(Brightness brightness) {
+    final colors = MenoColorScheme.$default(brightness);
+    final textTheme = MenoTextTheme.$default(colors);
+    final buttonTheme = MenoButtonTheme.$default(colors);
+
+    return MenoTheme(
+      colors: colors,
+      textTheme: textTheme,
+      buttonTheme: buttonTheme,
     );
   }
 
+  /// Retrieves the light [ThemeData]
+  static ThemeData get light => _raw(Brightness.light);
+
   /// Retrieves the dark [ThemeData]
-  static ThemeData get dark {
-    final colors = MenoColorScheme.dark();
-    final colorScheme = colors.darkMaterialColorScheme;
-    final textTheme = MenoTextTheme.$default(colorScheme);
-    final themeExtension = MenoTheme(colors: colors, textTheme: textTheme);
+  static ThemeData get dark => _raw(Brightness.dark);
+
+  /// {@macro meno_theme}
+  static ThemeData _raw(Brightness brightness) {
+    final colors = MenoColorScheme.$default(brightness);
+    final themeExtension = MenoTheme.$default(brightness);
+
     return ThemeData(
-      colorScheme: colors.darkMaterialColorScheme,
-      extensions: [themeExtension],
+      colorScheme: colors.materialColorScheme,
+      extensions: [
+        themeExtension,
+        themeExtension.buttonTheme,
+        themeExtension.colors,
+        themeExtension.textTheme,
+      ],
     );
   }
 
@@ -38,10 +78,12 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
   ThemeExtension<MenoTheme> copyWith({
     ThemeExtension<MenoColorScheme>? colors,
     ThemeExtension<MenoTextTheme>? textTheme,
+    ThemeExtension<MenoButtonTheme>? buttonTheme,
   }) {
     return MenoTheme(
       colors: colors ?? this.colors,
       textTheme: textTheme ?? this.textTheme,
+      buttonTheme: buttonTheme ?? this.buttonTheme,
     );
   }
 
@@ -50,6 +92,9 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
 
   /// [MenoTextTheme] instance provides configuration of [TextTheme]
   final ThemeExtension<MenoTextTheme> textTheme;
+
+  /// [MenoButtonTheme] instance provides configuration of [TextTheme]
+  final ThemeExtension<MenoButtonTheme> buttonTheme;
 
   @override
   ThemeExtension<MenoTheme> lerp(
@@ -60,6 +105,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
     return MenoTheme(
       colors: colors.lerp(other.colors, t),
       textTheme: textTheme.lerp(other.textTheme, t),
+      buttonTheme: buttonTheme.lerp(other.buttonTheme, t),
     );
   }
 }

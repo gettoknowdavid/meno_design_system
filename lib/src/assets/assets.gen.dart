@@ -62,9 +62,6 @@ class $AssetsEmojisGen {
   AssetGenImage get writingHand =>
       const AssetGenImage('assets/emojis/writing hand.png');
 
-  /// Directory path: packages/meno_design_system/assets/emojis
-  String get path => 'packages/meno_design_system/assets/emojis';
-
   /// List of all assets
   List<AssetGenImage> get values => [
     celebrate,
@@ -80,6 +77,16 @@ class $AssetsEmojisGen {
     wavingHand,
     writingHand,
   ];
+}
+
+class $AssetsGifsGen {
+  const $AssetsGifsGen();
+
+  /// File path: assets/gifs/loading.gif
+  AssetGenImage get loading => const AssetGenImage('assets/gifs/loading.gif');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [loading];
 }
 
 class $AssetsImagesGen {
@@ -104,9 +111,6 @@ class $AssetsImagesGen {
   AssetGenImage get liveForYou =>
       const AssetGenImage('assets/images/live_for_you.png');
 
-  /// File path: assets/images/loading.gif
-  AssetGenImage get loading => const AssetGenImage('assets/images/loading.gif');
-
   /// Directory path: assets/images/logo
   $AssetsImagesLogoGen get logo => const $AssetsImagesLogoGen();
 
@@ -121,16 +125,12 @@ class $AssetsImagesGen {
   /// File path: assets/images/success.png
   AssetGenImage get success => const AssetGenImage('assets/images/success.png');
 
-  /// Directory path: packages/meno_design_system/assets/images
-  String get path => 'packages/meno_design_system/assets/images';
-
   /// List of all assets
   List<dynamic> get values => [
     folder,
     geometricLines,
     icLauncher,
     liveForYou,
-    loading,
     newFile,
     success,
   ];
@@ -146,9 +146,6 @@ class $AssetsImagesBrandLogosGen {
   /// File path: assets/images/brand_logos/google.svg
   SvgGenImage get google =>
       const SvgGenImage('assets/images/brand_logos/google.svg');
-
-  /// Directory path: packages/meno_design_system/assets/images/brand_logos
-  String get path => 'packages/meno_design_system/assets/images/brand_logos';
 
   /// List of all assets
   List<SvgGenImage> get values => [facebook, google];
@@ -180,9 +177,6 @@ class $AssetsImagesLogoGen {
   AssetGenImage get splashLogo =>
       const AssetGenImage('assets/images/logo/splash-logo.png');
 
-  /// Directory path: packages/meno_design_system/assets/images/logo
-  String get path => 'packages/meno_design_system/assets/images/logo';
-
   /// List of all assets
   List<dynamic> get values => [
     logoDark,
@@ -213,9 +207,6 @@ class $AssetsImagesOnboardingGen {
   AssetGenImage get onboarding4 =>
       const AssetGenImage('assets/images/onboarding/onboarding-4.png');
 
-  /// Directory path: packages/meno_design_system/assets/images/onboarding
-  String get path => 'packages/meno_design_system/assets/images/onboarding';
-
   /// List of all assets
   List<AssetGenImage> get values => [
     onboarding1,
@@ -231,6 +222,7 @@ class MenoAssets {
   static const String package = 'meno_design_system';
 
   static const $AssetsEmojisGen emojis = $AssetsEmojisGen();
+  static const $AssetsGifsGen gifs = $AssetsGifsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
 }
 
