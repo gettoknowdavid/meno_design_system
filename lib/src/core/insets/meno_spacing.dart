@@ -8,7 +8,7 @@ class MenoSpacing {
   MenoSpacing._();
 
   /// Micro spacing of 4.0
-  static const xxs = Insets.xxs;
+  static const xs = Insets.xs;
 
   /// Small spacing of 8.0
   static const sm = Insets.sm;

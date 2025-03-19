@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meno_design_system/src/core/typography/meno_text_styles.dart';
+import 'package:meno_design_system/meno_design_system.dart';
 
 /// {@template meno_text_theme}
 /// Theme class which provides configuration of [TextStyle]
@@ -32,8 +32,8 @@ class MenoTextTheme extends ThemeExtension<MenoTextTheme> {
   });
 
   /// {@macro meno_text_theme}
-  factory MenoTextTheme.$default(ColorScheme colorScheme) {
-    final styles = MenoTextStyles(colorScheme: colorScheme);
+  factory MenoTextTheme.$default(MenoColorScheme colors) {
+    final styles = MenoTextStyles(colors: colors);
     return MenoTextTheme(
       heading1Regular: styles.heading1Regular,
       heading1Medium: styles.heading1Medium,
@@ -58,6 +58,12 @@ class MenoTextTheme extends ThemeExtension<MenoTextTheme> {
       nanoBold: styles.nanoBold,
       button: styles.button,
     );
+  }
+
+  /// {@macro meno_text_theme}
+  factory MenoTextTheme.of(BuildContext context) {
+    final theme = Theme.of(context).extension<MenoTheme>()!;
+    return theme.textTheme as MenoTextTheme;
   }
 
   /// Heading 1 Regular TextStyle

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meno_design_system/src/assets/fonts.gen.dart';
+import 'package:meno_design_system/src/core/colors/meno_color_scheme.dart';
 
 /// {@template meno_text_styles}
 /// Text styles for the app
@@ -7,10 +8,10 @@ import 'package:meno_design_system/src/assets/fonts.gen.dart';
 @immutable
 class MenoTextStyles {
   /// {@macro meno_theme}
-  const MenoTextStyles({required this.colorScheme});
+  const MenoTextStyles({required this.colors});
 
   /// Get colors from Material [ColorScheme]
-  final ColorScheme colorScheme;
+  final MenoColorScheme colors;
 
   /// Returns a `TextStyle` with predefined parameters
   TextStyle _style({
@@ -23,7 +24,8 @@ class MenoTextStyles {
       height: height,
       fontFamily: FontFamily.sFProDisplay,
       fontWeight: fontWeight,
-      color: colorScheme.onSurface,
+      color: colors.materialColorScheme.onSurface,
+      letterSpacing: 0,
     );
   }
 

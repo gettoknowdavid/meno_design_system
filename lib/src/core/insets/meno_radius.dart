@@ -9,7 +9,7 @@ class MenoRadius {
   MenoRadius._();
 
   /// Micro radius of 4.0
-  static const xxs = Radius.circular(Insets.xxs);
+  static const xs = Radius.circular(Insets.xs);
 
   /// Small radius of 8.0
   static const sm = Radius.circular(Insets.sm);
