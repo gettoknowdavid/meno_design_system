@@ -11,6 +11,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
     required this.colors,
     required this.textTheme,
     required this.buttonTheme,
+    required this.inputTheme,
   });
 
   /// Retrieves the [MenoTheme] extension from the closest [Theme] instance
@@ -44,11 +45,13 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
     final colors = MenoColorScheme.$default(brightness);
     final textTheme = MenoTextTheme.$default(colors);
     final buttonTheme = MenoButtonTheme.$default(colors);
+    final inputTheme = MenoInputTheme.$default(colors, textTheme);
 
     return MenoTheme(
       colors: colors,
       textTheme: textTheme,
       buttonTheme: buttonTheme,
+      inputTheme: inputTheme,
     );
   }
 
@@ -70,6 +73,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
         themeExtension.buttonTheme,
         themeExtension.colors,
         themeExtension.textTheme,
+        themeExtension.inputTheme,
       ],
     );
   }
@@ -79,11 +83,13 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
     ThemeExtension<MenoColorScheme>? colors,
     ThemeExtension<MenoTextTheme>? textTheme,
     ThemeExtension<MenoButtonTheme>? buttonTheme,
+    ThemeExtension<MenoInputTheme>? inputTheme,
   }) {
     return MenoTheme(
       colors: colors ?? this.colors,
       textTheme: textTheme ?? this.textTheme,
       buttonTheme: buttonTheme ?? this.buttonTheme,
+      inputTheme: inputTheme ?? this.inputTheme,
     );
   }
 
@@ -96,6 +102,9 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
   /// [MenoButtonTheme] instance provides configuration of [TextTheme]
   final ThemeExtension<MenoButtonTheme> buttonTheme;
 
+  /// [MenoInputTheme] instance provides configuration of [TextTheme]
+  final ThemeExtension<MenoInputTheme> inputTheme;
+
   @override
   ThemeExtension<MenoTheme> lerp(
     covariant ThemeExtension<MenoTheme>? other,
@@ -106,6 +115,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
       colors: colors.lerp(other.colors, t),
       textTheme: textTheme.lerp(other.textTheme, t),
       buttonTheme: buttonTheme.lerp(other.buttonTheme, t),
+      inputTheme: inputTheme.lerp(other.inputTheme, t),
     );
   }
 }
