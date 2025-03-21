@@ -69,6 +69,7 @@ class MenoColorScheme extends ThemeExtension<MenoColorScheme> {
     required this.notificationBase,
     required this.notificationLight,
     required this.notificationLighter,
+    required this.shadow,
   });
 
   /// {@macro meno_color_scheme}
@@ -77,7 +78,7 @@ class MenoColorScheme extends ThemeExtension<MenoColorScheme> {
     return MenoColorScheme.dark();
   }
 
-    /// {@macro meno_button_theme}
+  /// {@macro meno_button_theme}
   factory MenoColorScheme.of(BuildContext context) {
     final theme = Theme.of(context).extension<MenoTheme>()!;
     return theme.colors as MenoColorScheme;
@@ -148,6 +149,7 @@ class MenoColorScheme extends ThemeExtension<MenoColorScheme> {
       notificationBase: MenoColors.red.shade500,
       notificationLight: MenoColors.red.shade200,
       notificationLighter: MenoColors.red.shade50,
+      shadow: const Color.fromRGBO(0, 0, 0, 0.05),
     );
   }
 
@@ -216,6 +218,7 @@ class MenoColorScheme extends ThemeExtension<MenoColorScheme> {
       notificationBase: MenoColors.red.shade500,
       notificationLight: MenoColors.red.shade900,
       notificationLighter: MenoColors.red.shade900,
+      shadow: const Color.fromRGBO(0, 0, 0, 0.05),
     );
   }
 
@@ -283,6 +286,7 @@ class MenoColorScheme extends ThemeExtension<MenoColorScheme> {
     Color? notificationBase,
     Color? notificationLight,
     Color? notificationLighter,
+    Color? shadow,
   }) {
     return MenoColorScheme(
       brightness: brightness ?? this.brightness,
@@ -348,6 +352,7 @@ class MenoColorScheme extends ThemeExtension<MenoColorScheme> {
       notificationBase: notificationBase ?? this.notificationBase,
       notificationLight: notificationLight ?? this.notificationLight,
       notificationLighter: notificationLighter ?? this.notificationLighter,
+      shadow: shadow ?? this.shadow,
     );
   }
 
@@ -537,6 +542,9 @@ class MenoColorScheme extends ThemeExtension<MenoColorScheme> {
   /// Notification Lighter Color
   final Color notificationLighter;
 
+  /// Shadow Color
+  final Color shadow;
+
   @override
   ThemeExtension<MenoColorScheme> lerp(
     covariant ThemeExtension<MenoColorScheme>? other,
@@ -623,6 +631,7 @@ class MenoColorScheme extends ThemeExtension<MenoColorScheme> {
           Color.lerp(notificationLight, other.notificationLight, t)!,
       notificationLighter:
           Color.lerp(notificationLighter, other.notificationLighter, t)!,
+      shadow: Color.lerp(shadow, other.shadow, t)!,
     );
   }
 
@@ -730,6 +739,7 @@ class MenoColorScheme extends ThemeExtension<MenoColorScheme> {
         MenoColors.neutral[950]!,
         MenoColors.neutral.shade50,
       ),
+      shadow: shadow,
     );
   }
 

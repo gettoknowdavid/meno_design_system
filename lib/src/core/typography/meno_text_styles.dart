@@ -50,6 +50,17 @@ class MenoTextStyles {
   /// Heading 2 Bold
   TextStyle get heading2Bold =>
       _style(fontSize: 24, height: 32.0 / 24.0, fontWeight: FontWeight.bold);
+  
+  /// Heading 3 Regular
+  TextStyle get heading3Regular => _style(fontSize: 20, height: 30.0 / 20.0);
+
+  /// Heading 3 Medium
+  TextStyle get heading3Medium =>
+      _style(fontSize: 20, height: 30.0 / 20.0, fontWeight: FontWeight.w500);
+
+  /// Heading 3 Bold
+  TextStyle get heading3Bold =>
+      _style(fontSize: 20, height: 30.0 / 20.0, fontWeight: FontWeight.bold);
 
   /// Subheading Regular
   TextStyle get subheadingRegular => _style(fontSize: 16, height: 24.0 / 16.0);

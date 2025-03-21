@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:meno_design_system/meno_design_system.dart';
-import 'package:meno_design_system/src/components/inputs/meno_textfield.dart';
 
 /// {@template meno_validation_text}
 /// A custom error message widget for the [MenoTextfield]

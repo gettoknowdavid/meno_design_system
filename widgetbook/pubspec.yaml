@@ -23,3 +23,10 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  fonts:
+    - family: MIcons
+      fonts:
+        - asset: ../fonts/MIcons.ttf
+        - asset: ../fonts/MIcons.main.ttf
+    

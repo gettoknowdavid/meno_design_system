@@ -18,13 +18,14 @@ class Internal {
 
   /// Convenience method for easier use of [WidgetStateProperty.all].
   static WidgetStateProperty<T> all<T>(T value) {
-    return WidgetStateProperty.all(value);
+    return WidgetStatePropertyAll(value);
   }
 
   /// Convenience method for easier use of [WidgetStateProperty.resolveWith].
-  static WidgetStateProperty<T?> resolveWith<T>(
+  static WidgetStateProperty<T> resolveWith<T>(
     T defaultValue, {
     T? pressed,
+    T? focused,
     T? disabled,
     T? hovered,
     T? selected,
@@ -35,10 +36,14 @@ class Internal {
         return disabled;
       }
 
-      // pressed / focused
-      if (states.any({WidgetState.pressed, WidgetState.focused}.contains) &&
-          pressed != null) {
+      // pressed
+      if (states.contains(WidgetState.pressed) && pressed != null) {
         return pressed;
+      }
+
+      // pressed / focused
+      if (states.contains(WidgetState.focused) && focused != null) {
+        return focused;
       }
       // hovered
       if (states.contains(WidgetState.hovered) && hovered != null) {

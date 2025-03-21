@@ -13,6 +13,9 @@ class MenoTextTheme extends ThemeExtension<MenoTextTheme> {
     required this.heading2Regular,
     required this.heading2Medium,
     required this.heading2Bold,
+    required this.heading3Regular,
+    required this.heading3Medium,
+    required this.heading3Bold,
     required this.subheadingRegular,
     required this.subheadingMedium,
     required this.subheadingBold,
@@ -41,6 +44,9 @@ class MenoTextTheme extends ThemeExtension<MenoTextTheme> {
       heading2Regular: styles.heading2Regular,
       heading2Medium: styles.heading2Medium,
       heading2Bold: styles.heading2Bold,
+      heading3Regular: styles.heading3Regular,
+      heading3Medium: styles.heading3Medium,
+      heading3Bold: styles.heading3Bold,
       subheadingRegular: styles.subheadingRegular,
       subheadingMedium: styles.subheadingMedium,
       subheadingBold: styles.subheadingBold,
@@ -83,6 +89,15 @@ class MenoTextTheme extends ThemeExtension<MenoTextTheme> {
 
   /// Heading2 Bold TextStyle
   final TextStyle heading2Bold;
+
+  /// Heading 3 Regular TextStyle
+  final TextStyle heading3Regular;
+
+  /// Heading3 Medium TextStyle
+  final TextStyle heading3Medium;
+
+  /// Heading3 Bold TextStyle
+  final TextStyle heading3Bold;
 
   /// Subheading Regular TextStyle
   final TextStyle subheadingRegular;
@@ -140,6 +155,9 @@ class MenoTextTheme extends ThemeExtension<MenoTextTheme> {
     TextStyle? heading2Regular,
     TextStyle? heading2Medium,
     TextStyle? heading2Bold,
+    TextStyle? heading3Regular,
+    TextStyle? heading3Medium,
+    TextStyle? heading3Bold,
     TextStyle? subheadingRegular,
     TextStyle? subheadingMedium,
     TextStyle? subheadingBold,
@@ -164,6 +182,9 @@ class MenoTextTheme extends ThemeExtension<MenoTextTheme> {
       heading2Regular: heading2Regular ?? this.heading2Regular,
       heading2Medium: heading2Medium ?? this.heading2Medium,
       heading2Bold: heading2Bold ?? this.heading2Bold,
+      heading3Regular: heading3Regular ?? this.heading3Regular,
+      heading3Medium: heading3Medium ?? this.heading3Medium,
+      heading3Bold: heading3Bold ?? this.heading3Bold,
       subheadingRegular: subheadingRegular ?? this.subheadingRegular,
       subheadingMedium: subheadingMedium ?? this.subheadingMedium,
       subheadingBold: subheadingBold ?? this.subheadingBold,
@@ -198,6 +219,10 @@ class MenoTextTheme extends ThemeExtension<MenoTextTheme> {
           TextStyle.lerp(heading2Regular, other.heading2Regular, t)!,
       heading2Medium: TextStyle.lerp(heading2Medium, other.heading2Medium, t)!,
       heading2Bold: TextStyle.lerp(heading2Bold, other.heading2Bold, t)!,
+      heading3Regular:
+          TextStyle.lerp(heading3Regular, other.heading3Regular, t)!,
+      heading3Medium: TextStyle.lerp(heading3Medium, other.heading3Medium, t)!,
+      heading3Bold: TextStyle.lerp(heading3Bold, other.heading3Bold, t)!,
       subheadingRegular:
           TextStyle.lerp(subheadingRegular, other.subheadingRegular, t)!,
       subheadingMedium:
