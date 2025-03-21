@@ -12,6 +12,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
     required this.textTheme,
     required this.buttonTheme,
     required this.inputTheme,
+    required this.topBarTheme,
   });
 
   /// Retrieves the [MenoTheme] extension from the closest [Theme] instance
@@ -46,12 +47,14 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
     final textTheme = MenoTextTheme.$default(colors);
     final buttonTheme = MenoButtonTheme.$default(colors);
     final inputTheme = MenoInputTheme.$default(colors, textTheme);
+    final topBarTheme = MenoTopBarTheme.$default(colors, textTheme);
 
     return MenoTheme(
       colors: colors,
       textTheme: textTheme,
       buttonTheme: buttonTheme,
       inputTheme: inputTheme,
+      topBarTheme: topBarTheme,
     );
   }
 
@@ -74,6 +77,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
         themeExtension.colors,
         themeExtension.textTheme,
         themeExtension.inputTheme,
+        themeExtension.topBarTheme,
       ],
     );
   }
@@ -84,12 +88,14 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
     ThemeExtension<MenoTextTheme>? textTheme,
     ThemeExtension<MenoButtonTheme>? buttonTheme,
     ThemeExtension<MenoInputTheme>? inputTheme,
+    ThemeExtension<MenoTopBarTheme>? topBarTheme,
   }) {
     return MenoTheme(
       colors: colors ?? this.colors,
       textTheme: textTheme ?? this.textTheme,
       buttonTheme: buttonTheme ?? this.buttonTheme,
       inputTheme: inputTheme ?? this.inputTheme,
+      topBarTheme: topBarTheme ?? this.topBarTheme,
     );
   }
 
@@ -99,11 +105,14 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
   /// [MenoTextTheme] instance provides configuration of [TextTheme]
   final ThemeExtension<MenoTextTheme> textTheme;
 
-  /// [MenoButtonTheme] instance provides configuration of [TextTheme]
+  /// [MenoButtonTheme] instance provides configuration for buttons
   final ThemeExtension<MenoButtonTheme> buttonTheme;
 
-  /// [MenoInputTheme] instance provides configuration of [TextTheme]
+  /// [MenoInputTheme] instance provides configuration for input fields
   final ThemeExtension<MenoInputTheme> inputTheme;
+
+  /// [MenoTopBarTheme] instance provides configuration for [AppBar]s
+  final ThemeExtension<MenoTopBarTheme> topBarTheme;
 
   @override
   ThemeExtension<MenoTheme> lerp(
@@ -116,6 +125,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
       textTheme: textTheme.lerp(other.textTheme, t),
       buttonTheme: buttonTheme.lerp(other.buttonTheme, t),
       inputTheme: inputTheme.lerp(other.inputTheme, t),
+      topBarTheme: topBarTheme.lerp(other.topBarTheme, t),
     );
   }
 }

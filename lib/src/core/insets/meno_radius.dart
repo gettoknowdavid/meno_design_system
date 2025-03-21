@@ -29,3 +29,32 @@ class MenoRadius {
   /// Round Circle
   static const circle = Radius.circular(Insets.circle);
 }
+
+/// {@template meno_border_radius}
+///  Class contains all space (does not matter is it vertical
+///  or horizontal used in app
+/// {@endtemplate}
+class MenoBorderRadius {
+  MenoBorderRadius._();
+
+  /// Micro border radius of 4.0
+  static const xs = BorderRadius.all(MenoRadius.xs);
+
+  /// Small border radius of 8.0
+  static const sm = BorderRadius.all(MenoRadius.sm);
+
+  /// Medium border radius of 12.0
+  static const md = BorderRadius.all(MenoRadius.md);
+
+  /// Large border radius of 16.0
+  static const lg = BorderRadius.all(MenoRadius.lg);
+
+  /// Extra Large border radius of 20.0
+  static const xlg = BorderRadius.all(MenoRadius.xlg);
+
+  /// Extra extra Large border radius of 32.0
+  static const xxlg = BorderRadius.all(MenoRadius.xxlg);
+
+  /// Round border radius
+  static const circle = BorderRadius.all(MenoRadius.circle);
+}

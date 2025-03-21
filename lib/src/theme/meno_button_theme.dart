@@ -30,12 +30,26 @@ class MenoButtonTheme extends ThemeExtension<MenoButtonTheme> {
           colors.brandPrimary,
           disabled: colors.disabledLight,
           pressed: colors.brandPrimary.withValues(alpha: 0.4),
+          hovered: colors.brandPrimary.withValues(alpha: 0.4),
         ),
-        elevation: Internal.resolveWith(0, disabled: 4),
+        elevation: Internal.resolveWith(0, disabled: 4, hovered: 1),
         overlayColor: Internal.resolveWith(
           colors.brandPrimary,
-          disabled: colors.disabledLight,
           pressed: colors.brandPrimary.withValues(alpha: 0.4),
+          hovered: colors.brandPrimary.withValues(alpha: 0.4),
+          focused: colors.brandPrimary.withValues(alpha: 0.4),
+        ),
+        shadowColor: WidgetStatePropertyAll<Color>(colors.shadow),
+        minimumSize: Internal.all(Size.zero),
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        visualDensity: VisualDensity.compact,
+        mouseCursor: Internal.resolveWith(
+          SystemMouseCursors.click,
+          disabled: SystemMouseCursors.basic,
+        ),
+        iconColor: Internal.resolveWith(
+          colors.buttonLabelPrimary,
+          disabled: colors.labelDisabled,
         ),
       ),
       secondary: ButtonStyle(
@@ -49,11 +63,41 @@ class MenoButtonTheme extends ThemeExtension<MenoButtonTheme> {
             color: colors.buttonFill.withValues(alpha: 0.4),
           ),
         ),
+        mouseCursor: Internal.resolveWith(
+          SystemMouseCursors.click,
+          disabled: SystemMouseCursors.basic,
+        ),
+        iconColor: Internal.resolveWith(
+          colors.buttonLabelSecondary,
+          pressed: colors.buttonLabelSecondary.withValues(alpha: 0.4),
+        ),
+        overlayColor: Internal.resolveWith(
+          Colors.transparent,
+          pressed: colors.brandPrimary.withValues(alpha: 0.1),
+          hovered: colors.brandPrimary.withValues(alpha: 0.08),
+          focused: colors.brandPrimary.withValues(alpha: 0.1),
+        ),
+        minimumSize: Internal.all(Size.zero),
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        visualDensity: VisualDensity.compact,
+        elevation: Internal.resolveWith(0),
+        shadowColor: Internal.all(Colors.transparent),
       ),
       tertiary: ButtonStyle(
         foregroundColor: Internal.resolveWith(
           colors.buttonLabelSecondary,
           pressed: colors.buttonLabelSecondary.withValues(alpha: 0.4),
+        ),
+        overlayColor: Internal.resolveWith(Colors.transparent),
+        minimumSize: Internal.all(Size.zero),
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        visualDensity: VisualDensity.compact,
+        surfaceTintColor: Internal.all(Colors.transparent),
+        shadowColor: Internal.all(Colors.transparent),
+        elevation: Internal.resolveWith(0),
+        mouseCursor: Internal.resolveWith(
+          SystemMouseCursors.click,
+          disabled: SystemMouseCursors.basic,
         ),
       ),
       success: ButtonStyle(
@@ -61,11 +105,22 @@ class MenoButtonTheme extends ThemeExtension<MenoButtonTheme> {
         backgroundColor: Internal.resolveWith(
           colors.successBase,
           pressed: colors.successBase.withValues(alpha: 0.4),
+          hovered: colors.successBase.withValues(alpha: 0.4),
         ),
         elevation: Internal.resolveWith(0, disabled: 4),
         overlayColor: Internal.resolveWith(
           colors.successBase,
           pressed: colors.successBase.withValues(alpha: 0.4),
+          hovered: colors.successBase.withValues(alpha: 0.4),
+          focused: colors.successBase.withValues(alpha: 0.4),
+        ),
+        shadowColor: WidgetStatePropertyAll<Color>(colors.shadow),
+        minimumSize: Internal.all(Size.zero),
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        visualDensity: VisualDensity.compact,
+        mouseCursor: Internal.resolveWith(
+          SystemMouseCursors.click,
+          disabled: SystemMouseCursors.basic,
         ),
       ),
       danger: ButtonStyle(
@@ -73,11 +128,22 @@ class MenoButtonTheme extends ThemeExtension<MenoButtonTheme> {
         backgroundColor: Internal.resolveWith(
           colors.errorBase,
           pressed: colors.errorBase.withValues(alpha: 0.4),
+          hovered: colors.errorBase.withValues(alpha: 0.4),
         ),
         elevation: Internal.resolveWith(0, disabled: 4),
         overlayColor: Internal.resolveWith(
           colors.errorBase,
           pressed: colors.errorBase.withValues(alpha: 0.4),
+          hovered: colors.errorBase.withValues(alpha: 0.4),
+          focused: colors.errorBase.withValues(alpha: 0.4),
+        ),
+        shadowColor: WidgetStatePropertyAll<Color>(colors.shadow),
+        minimumSize: Internal.all(Size.zero),
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        visualDensity: VisualDensity.compact,
+        mouseCursor: Internal.resolveWith(
+          SystemMouseCursors.click,
+          disabled: SystemMouseCursors.basic,
         ),
       ),
       dangerLighter: ButtonStyle(
@@ -90,6 +156,16 @@ class MenoButtonTheme extends ThemeExtension<MenoButtonTheme> {
         overlayColor: Internal.resolveWith(
           colors.errorLighter,
           pressed: colors.errorLighter.withValues(alpha: 0.4),
+          hovered: colors.errorLighter.withValues(alpha: 0.4),
+          focused: colors.errorLighter.withValues(alpha: 0.4),
+        ),
+        shadowColor: WidgetStatePropertyAll<Color>(colors.shadow),
+        minimumSize: Internal.all(Size.zero),
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        visualDensity: VisualDensity.compact,
+        mouseCursor: Internal.resolveWith(
+          SystemMouseCursors.click,
+          disabled: SystemMouseCursors.basic,
         ),
       ),
       outlined: ButtonStyle(
@@ -103,17 +179,38 @@ class MenoButtonTheme extends ThemeExtension<MenoButtonTheme> {
             color: colors.strokeSoft.withValues(alpha: 0.4),
           ),
         ),
+        mouseCursor: Internal.resolveWith(
+          SystemMouseCursors.click,
+          disabled: SystemMouseCursors.basic,
+        ),
+        overlayColor: Internal.resolveWith(Colors.transparent),
+        minimumSize: Internal.all(Size.zero),
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        visualDensity: VisualDensity.compact,
+        elevation: Internal.resolveWith(0),
+        shadowColor: Internal.all(Colors.transparent),
       ),
       white: ButtonStyle(
         foregroundColor: Internal.resolveWith(colors.staticBlack),
         backgroundColor: Internal.resolveWith(
           colors.staticWhite,
           pressed: colors.staticWhite.withValues(alpha: 0.4),
+          hovered: colors.staticWhite.withValues(alpha: 0.4),
         ),
         elevation: Internal.resolveWith(0, disabled: 4),
         overlayColor: Internal.resolveWith(
           colors.staticWhite,
           pressed: colors.staticWhite.withValues(alpha: 0.4),
+          hovered: colors.staticWhite.withValues(alpha: 0.4),
+          focused: colors.staticWhite.withValues(alpha: 0.4),
+        ),
+        shadowColor: WidgetStatePropertyAll<Color>(colors.shadow),
+        minimumSize: Internal.all(Size.zero),
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        visualDensity: VisualDensity.compact,
+        mouseCursor: Internal.resolveWith(
+          SystemMouseCursors.click,
+          disabled: SystemMouseCursors.basic,
         ),
       ),
     );

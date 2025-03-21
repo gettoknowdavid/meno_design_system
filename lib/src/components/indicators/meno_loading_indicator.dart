@@ -77,3 +77,22 @@ class MenoLoadingIndicator extends StatelessWidget {
     );
   }
 }
+
+/// {@template meno_loading_indicator}
+/// A custom loading indicator that displays based on the [MenoSize]
+/// {@endtemplate}
+class MenoLoadingIndicatorBySize extends StatelessWidget {
+  /// {@macro meno_loading_indicator}
+  const MenoLoadingIndicatorBySize(this.size, {super.key});
+
+  /// The size of the widget
+  final MenoSize size;
+
+  @override
+  Widget build(BuildContext context) => switch (size) {
+    MenoSize.xs => const MenoLoadingIndicator.xs(),
+    MenoSize.sm => const MenoLoadingIndicator.sm(),
+    MenoSize.md => const MenoLoadingIndicator.md(),
+    MenoSize.lg => const MenoLoadingIndicator.lg(),
+  };
+}

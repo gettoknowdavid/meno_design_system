@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:meno_design_system/meno_design_system.dart';
-import 'package:meno_design_system/src/components/inputs/meno_textfield.dart';
 
 /// {@template password_eye}
 /// A custom widget for enabling and disabling the [MenoTextfield]
