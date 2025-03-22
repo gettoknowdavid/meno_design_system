@@ -214,14 +214,19 @@ class _TextfieldWidget extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final theme = MenoInputTheme.of(context);
-    final focus = focusNode ?? useMemoized(FocusNode.new, []);
-    final focusListenable = ValueNotifier<bool>(focus?.hasFocus ?? false);
-    final hasFocus = useListenable(focusListenable);
-    final obscureText = useState(isPassword);
-
     final border = useMemoized(() => _border(context, size), [context, size]);
     final contentPadding = useMemoized(() => _contentPadding(size), [size]);
     final iconConstraints = useMemoized(() => _iconConstraints(size), [size]);
+
+    final obscureText = useState(isPassword);
+    final focus = focusNode ?? useMemoized(FocusNode.new, []);
+    final hasFocus = useState(focus?.hasFocus ?? false);
+
+    useEffect(() {
+      void listener() => hasFocus.value = focus?.hasFocus ?? false;
+      focus?.addListener(listener);
+      return () => focus?.removeListener(listener);
+    }, [focus]);
 
     final effectiveColor = useMemoized(() {
       if (hasError) return theme.errorColor;
@@ -231,26 +236,13 @@ class _TextfieldWidget extends HookWidget {
       return theme.defaultColor;
     }, [hasError, enabled, hasFocus, isEmpty, theme]);
 
-    useEffect(() {
-      void listener() => focusListenable.value = focus?.hasFocus ?? false;
-      focus?.addListener(listener);
-
-      return () {
-        focus?.removeListener(listener);
-        focusListenable.dispose();
-        if (focusNode == null) {
-          focus?.dispose();
-        }
-      };
-    }, [focus]);
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (label != null && label!.isNotEmpty) ...[
           MenoInputLabel(
             label!,
-            icon: labelIcon != null ? Icon(labelIcon) : null,
+            icon: labelIcon,
             color: effectiveColor,
             required: required,
             enabled: enabled,

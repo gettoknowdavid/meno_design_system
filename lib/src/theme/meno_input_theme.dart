@@ -10,6 +10,7 @@ class MenoInputTheme extends ThemeExtension<MenoInputTheme> {
     required this.textStyle,
     required this.labelTextStyle,
     required this.errorTextStyle,
+    required this.counterTextStyle,
     required this.validationTextStyle,
     required this.defaultColor,
     required this.errorColor,
@@ -19,6 +20,10 @@ class MenoInputTheme extends ThemeExtension<MenoInputTheme> {
     required this.fillColor,
     required this.cursorColor,
     required this.iconColor,
+    required this.counterFocusedColor,
+    required this.counterDisabledColor,
+    required this.counterContainerFocusedColor,
+    required this.counterContainerDisabledColor,
   });
 
   /// {@macro meno_input_theme}
@@ -76,6 +81,11 @@ class MenoInputTheme extends ThemeExtension<MenoInputTheme> {
         }
         return colors.labelPlaceholder;
       }),
+      counterTextStyle: textTheme.microMedium,
+      counterFocusedColor: colors.brandPrimary,
+      counterDisabledColor: colors.labelHelp,
+      counterContainerFocusedColor: colors.brandPrimaryLighter,
+      counterContainerDisabledColor: colors.componentPrimary,
     );
   }
 
@@ -121,12 +131,28 @@ class MenoInputTheme extends ThemeExtension<MenoInputTheme> {
   /// Color of the [MenoTextfield]'s `prefixIcon` and `suffixIcon`
   final Color iconColor;
 
+  /// TextStyle for input counter
+  final TextStyle counterTextStyle;
+
+  /// Color for the input counter when focused
+  final Color counterFocusedColor;
+
+  /// Color for the input counter when disabled
+  final Color counterDisabledColor;
+
+  /// Color for the input counter container when focused
+  final Color counterContainerFocusedColor;
+
+  /// Color for the input counter container when disabled
+  final Color counterContainerDisabledColor;
+
   @override
   ThemeExtension<MenoInputTheme> copyWith({
     TextStyle? textStyle,
     TextStyle? labelTextStyle,
     TextStyle? errorTextStyle,
     TextStyle? validationTextStyle,
+    TextStyle? counterTextStyle,
     Color? defaultColor,
     Color? errorColor,
     Color? focusedColor,
@@ -135,11 +161,16 @@ class MenoInputTheme extends ThemeExtension<MenoInputTheme> {
     Color? fillColor,
     Color? cursorColor,
     Color? iconColor,
+    Color? counterFocusedColor,
+    Color? counterDisabledColor,
+    Color? counterContainerFocusedColor,
+    Color? counterContainerDisabledColor,
   }) {
     return MenoInputTheme(
       textStyle: textStyle ?? this.textStyle,
       labelTextStyle: labelTextStyle ?? this.labelTextStyle,
       errorTextStyle: errorTextStyle ?? this.errorTextStyle,
+      counterTextStyle: counterTextStyle ?? this.counterTextStyle,
       validationTextStyle: validationTextStyle ?? this.validationTextStyle,
       defaultColor: defaultColor ?? this.defaultColor,
       errorColor: errorColor ?? this.errorColor,
@@ -149,6 +180,12 @@ class MenoInputTheme extends ThemeExtension<MenoInputTheme> {
       fillColor: fillColor ?? this.fillColor,
       cursorColor: cursorColor ?? this.cursorColor,
       iconColor: iconColor ?? this.iconColor,
+      counterFocusedColor: counterFocusedColor ?? this.counterFocusedColor,
+      counterDisabledColor: counterDisabledColor ?? this.counterDisabledColor,
+      counterContainerFocusedColor:
+          counterContainerFocusedColor ?? this.counterContainerFocusedColor,
+      counterContainerDisabledColor:
+          counterContainerDisabledColor ?? this.counterContainerDisabledColor,
     );
   }
 
@@ -162,6 +199,8 @@ class MenoInputTheme extends ThemeExtension<MenoInputTheme> {
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t)!,
       labelTextStyle: TextStyle.lerp(labelTextStyle, other.labelTextStyle, t)!,
       errorTextStyle: TextStyle.lerp(errorTextStyle, other.errorTextStyle, t)!,
+      counterTextStyle:
+          TextStyle.lerp(counterTextStyle, other.counterTextStyle, t)!,
       validationTextStyle:
           TextStyle.lerp(validationTextStyle, other.validationTextStyle, t)!,
       defaultColor: Color.lerp(defaultColor, other.defaultColor, t)!,
@@ -173,6 +212,22 @@ class MenoInputTheme extends ThemeExtension<MenoInputTheme> {
       fillColor: Color.lerp(fillColor, other.fillColor, t)!,
       cursorColor: Color.lerp(cursorColor, other.cursorColor, t)!,
       iconColor: Color.lerp(iconColor, other.iconColor, t)!,
+      counterFocusedColor:
+          Color.lerp(counterFocusedColor, other.counterFocusedColor, t)!,
+      counterDisabledColor:
+          Color.lerp(counterDisabledColor, other.counterDisabledColor, t)!,
+      counterContainerFocusedColor:
+          Color.lerp(
+            counterContainerFocusedColor,
+            other.counterContainerFocusedColor,
+            t,
+          )!,
+      counterContainerDisabledColor:
+          Color.lerp(
+            counterContainerDisabledColor,
+            other.counterContainerDisabledColor,
+            t,
+          )!,
     );
   }
 }
