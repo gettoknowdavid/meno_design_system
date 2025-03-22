@@ -71,6 +71,11 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
 
     return ThemeData(
       colorScheme: colors.materialColorScheme,
+      dividerTheme: DividerThemeData(
+        color: colors.strokeSoft,
+        thickness: 1,
+        space: 0,
+      ),
       visualDensity: VisualDensity.compact,
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       extensions: [
