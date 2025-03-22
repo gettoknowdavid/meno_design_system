@@ -28,16 +28,16 @@ class PrimaryTopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = MenoTopBarTheme.of(context).primary;
+    final theme = MenoTopBarTheme.of(context).primary;
 
-    final colorFilter = ColorFilter.mode(style.accentColor!, BlendMode.srcIn);
+    final colorFilter = ColorFilter.mode(theme.accentColor!, BlendMode.srcIn);
 
     return AppBar(
       automaticallyImplyLeading: false,
-      backgroundColor: style.backgroundColor,
-      foregroundColor: style.titleColor,
-      titleTextStyle: style.textStyle,
-      toolbarHeight: style.topbarHeight,
+      backgroundColor: theme.backgroundColor,
+      foregroundColor: theme.titleColor,
+      titleTextStyle: theme.textStyle,
+      toolbarHeight: theme.topbarHeight,
       flexibleSpace: Stack(
         fit: StackFit.passthrough,
         alignment: Alignment.centerLeft,
@@ -49,25 +49,22 @@ class PrimaryTopBar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 if (implyLeading) ...[
-                  // TertiaryButton.icon(
-                  //   label: backLabelText ?? 'Back',
-                  //   icon: const Icon(Icons.chevron_left),
-                  //   onTap: onBackButtonPressed,
-                  //   size: MenoSize.xs,
-                  //   forcedHeight: 18,
-                  //   style: ButtonStyle(
-                  //     textStyle: Internal.all(style.leadingTextStyle),
-                  //     padding: Internal.all(EdgeInsets.zero),
-                  //     foregroundColor: Internal.resolveWith(
-                  //       style.leadingColor!,
-                  //     ),
-                  //   ),
-                  // ),
+                  MenoTertiaryButton.icon(
+                    label: Text(backLabelText ?? 'Back'),
+                    icon: const Icon(MIcons.chevron_left),
+                    onPressed: onBackButtonPressed,
+                    size: MenoSize.xs,
+                    style: ButtonStyle(
+                      textStyle: Internal.all(theme.leadingTextStyle),
+                      padding: Internal.all(EdgeInsets.zero),
+                      foregroundColor: Internal.all(theme.leadingColor),
+                    ),
+                  ),
                   const SizedBox(height: Insets.lg),
                 ],
                 Text(
                   title,
-                  style: style.textStyle?.copyWith(color: style.titleColor),
+                  style: theme.textStyle?.copyWith(color: theme.titleColor),
                 ),
               ],
             ),
