@@ -11,12 +11,14 @@ class MenoInputTheme extends ThemeExtension<MenoInputTheme> {
     required this.labelTextStyle,
     required this.errorTextStyle,
     required this.validationTextStyle,
-    required this.defaultBorderColor,
-    required this.errorBorderColor,
-    required this.focusedBorderColor,
-    required this.disabledBorderColor,
+    required this.defaultColor,
+    required this.errorColor,
+    required this.focusedColor,
+    required this.focusedLabelColor,
+    required this.disabledColor,
     required this.fillColor,
     required this.cursorColor,
+    required this.iconColor,
   });
 
   /// {@macro meno_input_theme}
@@ -39,19 +41,7 @@ class MenoInputTheme extends ThemeExtension<MenoInputTheme> {
         }
         return baseTextStyle.copyWith(color: color);
       }),
-      labelTextStyle: WidgetStateTextStyle.resolveWith((states) {
-        late Color color;
-        if (states.contains(WidgetState.disabled)) {
-          color = colors.labelDisabled;
-        } else if (states.contains(WidgetState.focused)) {
-          color = colors.labelPrimary;
-        } else if (states.contains(WidgetState.error)) {
-          color = colors.errorBase;
-        } else {
-          color = colors.labelPlaceholder;
-        }
-        return baseTextStyle.copyWith(color: color);
-      }),
+      labelTextStyle: textTheme.captionMedium,
       errorTextStyle: baseTextStyle.copyWith(color: colors.errorBase),
       validationTextStyle: WidgetStateTextStyle.resolveWith((states) {
         late Color color;
@@ -64,10 +54,11 @@ class MenoInputTheme extends ThemeExtension<MenoInputTheme> {
         }
         return baseTextStyle.copyWith(color: color);
       }),
-      defaultBorderColor: colors.strokeSoft,
-      disabledBorderColor: colors.disabledLight,
-      errorBorderColor: colors.errorBase,
-      focusedBorderColor: colors.brandPrimary,
+      defaultColor: colors.strokeSoft,
+      disabledColor: colors.disabledLight,
+      errorColor: colors.errorBase,
+      focusedColor: colors.brandPrimary,
+      focusedLabelColor: colors.labelPrimary,
       fillColor: WidgetStateColor.resolveWith((states) {
         if (states.contains(WidgetState.disabled)) {
           return colors.disabledLight;
@@ -75,6 +66,16 @@ class MenoInputTheme extends ThemeExtension<MenoInputTheme> {
         return Colors.transparent;
       }),
       cursorColor: colors.strokeStrong,
+      iconColor: WidgetStateColor.resolveWith((states) {
+        if (states.contains(WidgetState.disabled)) {
+          return colors.disabledBase;
+        } else if (states.contains(WidgetState.error)) {
+          return colors.labelPrimary;
+        } else if (states.contains(WidgetState.focused)) {
+          return colors.labelPrimary;
+        }
+        return colors.labelPlaceholder;
+      }),
     );
   }
 
@@ -97,16 +98,19 @@ class MenoInputTheme extends ThemeExtension<MenoInputTheme> {
   final TextStyle validationTextStyle;
 
   /// Default border color of the [MenoTextfield]
-  final Color defaultBorderColor;
+  final Color defaultColor;
 
   /// Error border color of the [MenoTextfield]
-  final Color errorBorderColor;
+  final Color errorColor;
 
   /// Focused border color of the [MenoTextfield]
-  final Color focusedBorderColor;
+  final Color focusedColor;
+
+  /// Focused border color of the [MenoTextfield]
+  final Color focusedLabelColor;
 
   /// Disabled border color of the [MenoTextfield]
-  final Color disabledBorderColor;
+  final Color disabledColor;
 
   /// Color of the [MenoTextfield] container
   final Color fillColor;
@@ -114,30 +118,37 @@ class MenoInputTheme extends ThemeExtension<MenoInputTheme> {
   /// Color of the [MenoTextfield] cursor
   final Color cursorColor;
 
+  /// Color of the [MenoTextfield]'s `prefixIcon` and `suffixIcon`
+  final Color iconColor;
+
   @override
   ThemeExtension<MenoInputTheme> copyWith({
     TextStyle? textStyle,
     TextStyle? labelTextStyle,
     TextStyle? errorTextStyle,
     TextStyle? validationTextStyle,
-    Color? defaultBorderColor,
-    Color? errorBorderColor,
-    Color? focusedBorderColor,
-    Color? disabledBorderColor,
+    Color? defaultColor,
+    Color? errorColor,
+    Color? focusedColor,
+    Color? focusedLabelColor,
+    Color? disabledColor,
     Color? fillColor,
     Color? cursorColor,
+    Color? iconColor,
   }) {
     return MenoInputTheme(
       textStyle: textStyle ?? this.textStyle,
       labelTextStyle: labelTextStyle ?? this.labelTextStyle,
       errorTextStyle: errorTextStyle ?? this.errorTextStyle,
       validationTextStyle: validationTextStyle ?? this.validationTextStyle,
-      defaultBorderColor: defaultBorderColor ?? this.defaultBorderColor,
-      errorBorderColor: errorBorderColor ?? this.errorBorderColor,
-      focusedBorderColor: focusedBorderColor ?? this.focusedBorderColor,
-      disabledBorderColor: disabledBorderColor ?? this.disabledBorderColor,
+      defaultColor: defaultColor ?? this.defaultColor,
+      errorColor: errorColor ?? this.errorColor,
+      focusedColor: focusedColor ?? this.focusedColor,
+      focusedLabelColor: focusedLabelColor ?? this.focusedLabelColor,
+      disabledColor: disabledColor ?? this.disabledColor,
       fillColor: fillColor ?? this.fillColor,
       cursorColor: cursorColor ?? this.cursorColor,
+      iconColor: iconColor ?? this.iconColor,
     );
   }
 
@@ -153,16 +164,15 @@ class MenoInputTheme extends ThemeExtension<MenoInputTheme> {
       errorTextStyle: TextStyle.lerp(errorTextStyle, other.errorTextStyle, t)!,
       validationTextStyle:
           TextStyle.lerp(validationTextStyle, other.validationTextStyle, t)!,
-      defaultBorderColor:
-          Color.lerp(defaultBorderColor, other.defaultBorderColor, t)!,
-      errorBorderColor:
-          Color.lerp(errorBorderColor, other.errorBorderColor, t)!,
-      focusedBorderColor:
-          Color.lerp(focusedBorderColor, other.focusedBorderColor, t)!,
-      disabledBorderColor:
-          Color.lerp(disabledBorderColor, other.disabledBorderColor, t)!,
+      defaultColor: Color.lerp(defaultColor, other.defaultColor, t)!,
+      errorColor: Color.lerp(errorColor, other.errorColor, t)!,
+      focusedColor: Color.lerp(focusedColor, other.focusedColor, t)!,
+      focusedLabelColor:
+          Color.lerp(focusedLabelColor, other.focusedLabelColor, t)!,
+      disabledColor: Color.lerp(disabledColor, other.disabledColor, t)!,
       fillColor: Color.lerp(fillColor, other.fillColor, t)!,
       cursorColor: Color.lerp(cursorColor, other.cursorColor, t)!,
+      iconColor: Color.lerp(iconColor, other.iconColor, t)!,
     );
   }
 }

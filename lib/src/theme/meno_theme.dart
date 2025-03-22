@@ -71,6 +71,8 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
 
     return ThemeData(
       colorScheme: colors.materialColorScheme,
+      visualDensity: VisualDensity.compact,
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       extensions: [
         themeExtension,
         themeExtension.buttonTheme,

@@ -1,66 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:meno_design_system/meno_design_system.dart';
 
-/// {@template meno_input_icon}
-/// A custom icon widget for a [MenoInputLabel]
-/// {@endtemplate}
-class MenoInputIcon extends StatelessWidget {
-  /// {@macro meno_input_icon}
-  const MenoInputIcon(
-    this.icon, {
-    super.key,
-    this.size = MenoSize.md,
-    this.color,
-    this.alignment = Alignment.centerRight,
-  });
-
-  /// Icon widget
-  final Widget icon;
-
-  /// [MenoSize] value
-  final MenoSize size;
-
-  /// Optional color
-  final Color? color;
-
-  /// Alignment of the icon
-  final Alignment? alignment;
-
-  @override
-  Widget build(BuildContext context) {
-    final inputTheme = MenoInputTheme.of(context);
-
-    late final iconSize = switch (size) {
-      MenoSize.sm => 14.0,
-      MenoSize.md => 16.0,
-      _ => 20.0,
-    };
-
-    return Container(
-      width: iconSize,
-      alignment: alignment,
-      child: IconTheme(
-        data: IconThemeData(
-          color: color ?? inputTheme.textStyle.color,
-          size: iconSize,
-        ),
-        child: icon,
-      ),
-    );
-  }
-}
-
 /// {@template meno_input_label}
-/// A custom text field class for input with validation
+/// A custom input label class
 /// {@endtemplate}
 class MenoInputLabel extends StatelessWidget {
-  /// {@macro meno_textfield}
+  /// {@macro meno_input_label}
   const MenoInputLabel(
     this.data, {
     super.key,
     this.icon,
     this.style,
     this.color,
+    this.required = false,
+    this.enabled = true,
   });
 
   /// The string to be displayed
@@ -75,11 +28,18 @@ class MenoInputLabel extends StatelessWidget {
   /// Optional color
   final Color? color;
 
+  /// A boolean indicating whether the field is required. Defaults to false.
+  final bool required;
+
+  /// If the field is enabled
+  final bool enabled;
+
   @override
   Widget build(BuildContext context) {
     final theme = MenoInputTheme.of(context);
-    final effectiveStyle = theme.labelTextStyle.merge(style);
+    final effectiveStyle = style ?? theme.labelTextStyle;
     final effectiveColor = color ?? effectiveStyle.color;
+    final asteriskColor = !enabled ? theme.disabledColor : theme.errorColor;
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -90,7 +50,11 @@ class MenoInputLabel extends StatelessWidget {
           ),
           const SizedBox(width: 6),
         ],
-        Text(data, style: effectiveStyle.copyWith(color: color)),
+        Text(data, style: effectiveStyle.copyWith(color: effectiveColor)),
+        if (required) ...[
+          const SizedBox(width: Insets.xs),
+          Text('*', style: theme.labelTextStyle.copyWith(color: asteriskColor)),
+        ],
       ],
     );
   }
