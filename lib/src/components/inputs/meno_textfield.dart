@@ -264,7 +264,6 @@ class _TextfieldWidget extends HookWidget {
           enabled: enabled,
           autofocus: autofocus,
           obscureText: obscureText.value,
-          obscuringCharacter: '*',
           decoration: InputDecoration(
             hintStyle: theme.textStyle,
             hintText: placeholder,

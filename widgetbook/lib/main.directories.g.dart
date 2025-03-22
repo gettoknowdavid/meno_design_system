@@ -25,12 +25,14 @@ import 'package:widgetbook_workspace/src/components/buttons/meno_tertiary_button
     as _i7;
 import 'package:widgetbook_workspace/src/components/buttons/meno_white_button.dart'
     as _i8;
-import 'package:widgetbook_workspace/src/components/inputs/meno_textbox.dart'
+import 'package:widgetbook_workspace/src/components/inputs/meno_otp_field.dart'
     as _i9;
-import 'package:widgetbook_workspace/src/components/inputs/meno_textfield.dart'
+import 'package:widgetbook_workspace/src/components/inputs/meno_textbox.dart'
     as _i10;
-import 'package:widgetbook_workspace/src/components/navigations/meno_top_bar.dart'
+import 'package:widgetbook_workspace/src/components/inputs/meno_textfield.dart'
     as _i11;
+import 'package:widgetbook_workspace/src/components/navigations/meno_top_bar.dart'
+    as _i12;
 
 final directories = <_i1.WidgetbookNode>[
   _i1.WidgetbookFolder(
@@ -94,17 +96,24 @@ final directories = <_i1.WidgetbookNode>[
         name: 'inputs',
         children: [
           _i1.WidgetbookLeafComponent(
+            name: 'MenoOtpField',
+            useCase: _i1.WidgetbookUseCase(
+              name: 'MenoOtpField',
+              builder: _i9.buildMenoOtpFieldUseCase,
+            ),
+          ),
+          _i1.WidgetbookLeafComponent(
             name: 'MenoTextbox',
             useCase: _i1.WidgetbookUseCase(
               name: 'MenoTextbox',
-              builder: _i9.buildMenoTextboxUseCase,
+              builder: _i10.buildMenoTextboxUseCase,
             ),
           ),
           _i1.WidgetbookLeafComponent(
             name: 'MenoTextfield',
             useCase: _i1.WidgetbookUseCase(
               name: 'MenoTextfield',
-              builder: _i10.buildMenoTextfieldUseCase,
+              builder: _i11.buildMenoTextfieldUseCase,
             ),
           ),
         ],
@@ -119,7 +128,7 @@ final directories = <_i1.WidgetbookNode>[
                 name: 'MenoTopBar',
                 useCase: _i1.WidgetbookUseCase(
                   name: 'TopBar',
-                  builder: _i11.buildTopBarUseCase,
+                  builder: _i12.buildTopBarUseCase,
                 ),
               ),
             ],
