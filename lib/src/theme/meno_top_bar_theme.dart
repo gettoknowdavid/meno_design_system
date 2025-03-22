@@ -35,8 +35,11 @@ class MenoTopBarTheme extends ThemeExtension<MenoTopBarTheme> {
           colors.buttonLabelPrimary,
           colors.labelPrimary,
         ),
+        leadingWidth: 0,
+        titleSpacing: 0,
       ),
       secondary: TopBarStyle(
+        leadingWidth: 40,
         topbarHeight: 56,
         backgroundColor: colors.backgroundDefault,
         textStyle: textTheme.bodyMedium,
@@ -44,6 +47,7 @@ class MenoTopBarTheme extends ThemeExtension<MenoTopBarTheme> {
         actionColor: colors.buttonLabelSecondary,
         leadingColor: colors.buttonLabelSecondary,
         bottomBorder: Border(bottom: BorderSide(color: colors.strokeWeak)),
+        titleSpacing: Insets.xs,
       ),
     );
   }

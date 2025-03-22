@@ -1,92 +1,178 @@
 import 'package:flutter/material.dart';
-import 'package:meno_design_system/src/components/navigations/top_bar/primary_top_bar.dart';
-import 'package:meno_design_system/src/components/navigations/top_bar/secondary_top_bar.dart';
-
-/// Enum representing different types of app bars.
-enum TopBarType {
-  /// Large top bar
-  primary,
-
-  /// Small sized top bar
-  secondary,
-}
-
-/// Enum representing the different sizes of the app bar's title
-enum TopBarTitleSize {
-  /// The default size
-  normal,
-
-  /// The large size
-  large,
-}
+import 'package:meno_design_system/meno_design_system.dart';
+import 'package:meno_design_system/src/components/navigations/top_bar/base_top_bar.dart';
 
 /// {@template meno_top_bar}
 /// Base class for different app bar types.
 /// {@endtemplate}
-class MenoTopBar extends StatelessWidget implements PreferredSizeWidget {
+class MenoTopBar extends BaseTopBar {
   /// {@macro meno_top_bar}
-  const MenoTopBar({
-    required this.title,
-    required this.type,
+  const MenoTopBar._({
+    required super.topBarHeight,
+    super.title,
+    super.titleSize,
     super.key,
-    this.backButton,
-    this.onBackButtonPressed,
-    this.centerTitle = false,
-    this.actions,
-    this.implyLeading = true,
-    this.backLabelText,
-    this.titleSize = TopBarTitleSize.normal,
+    super.backButton,
+    super.onBackButtonPressed,
+    super.centerTitle = false,
+    super.actions,
+    super.implyLeading = true,
+    super.backLabelText,
+    super.leading,
+    super.flexibleSpace,
   });
 
-  /// The title of the top bar
-  final String title;
+  /// Primary Top Bar
+  factory MenoTopBar.primary({
+    required String title,
+    Key? key,
+    String? backLabelText,
+    bool implyLeading = false,
+    VoidCallback? onBackButtonPressed,
+  }) {
+    return MenoTopBar._(
+      topBarHeight: 120,
+      flexibleSpace: _PrimaryTopBar(
+        key: key,
+        title: title,
+        backLabelText: backLabelText,
+        implyLeading: implyLeading,
+        onBackButtonPressed: onBackButtonPressed,
+      ),
+    );
+  }
 
-  /// Custom back button
-  final Widget? backButton;
-
-  /// Custom label text for back button
-  final String? backLabelText;
-
-  /// Custom callback to set what happens when a user taps the back button
-  final VoidCallback? onBackButtonPressed;
-
-  /// Whether to center the title.
-  final bool centerTitle;
-
-  /// A list of widgets to display on the right side of the app bar.
-  final List<Widget>? actions;
-
-  /// The type of the top bar.
-  final TopBarType type;
-
-  /// The size of the top bar's title.
-  ///
-  /// Only applicable to the `secondary` [TopBarType]
-  final TopBarTitleSize titleSize;
-
-  /// If the leading widget should be shown
-  final bool implyLeading;
-
-  @override
-  Widget build(BuildContext context) => switch (type) {
-    TopBarType.primary => PrimaryTopBar(
-      title,
-      onBackButtonPressed: onBackButtonPressed,
-      implyLeading: implyLeading,
-      backLabelText: backLabelText,
-    ),
-    TopBarType.secondary => SecondaryTopBar(
-      title,
-      titleSize: titleSize,
-      onBackButtonPressed: onBackButtonPressed,
+  /// Secondary Top Bar
+  factory MenoTopBar.secondary({
+    required String title,
+    Key? key,
+    VoidCallback? onBackButtonPressed,
+    List<Widget>? actions,
+    bool centerTitle = false,
+    MenoSize titleSize = MenoSize.md,
+  }) {
+    return _SecondaryTopBar(
+      key: key,
+      title: title,
       actions: actions,
       centerTitle: centerTitle,
-    ),
-  };
+      onBackButtonPressed: onBackButtonPressed,
+      titleSize: titleSize,
+    );
+  }
 
   @override
-  Size get preferredSize => switch (type) {
-    TopBarType.primary => const Size.fromHeight(120),
-    _ => const Size.fromHeight(56),
-  };
+  TopBarStyle defaultStyleOf(BuildContext context) {
+    return MenoTopBarTheme.of(context).primary;
+  }
+
+  @override
+  TopBarStyle? themeStyleOf(BuildContext context) {
+    return MenoTopBarTheme.of(context).primary;
+  }
+}
+
+class _PrimaryTopBar extends StatelessWidget {
+  const _PrimaryTopBar({
+    required this.title,
+    super.key,
+    this.implyLeading = false,
+    this.backLabelText,
+    this.onBackButtonPressed,
+  });
+
+  final String title;
+  final bool implyLeading;
+  final String? backLabelText;
+  final VoidCallback? onBackButtonPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final style = MenoTopBarTheme.of(context).primary;
+    final colorFilter = ColorFilter.mode(style.accentColor!, BlendMode.srcIn);
+    final titleTextStyle = style.textStyle?.copyWith(color: style.titleColor);
+
+    return Stack(
+      fit: StackFit.passthrough,
+      alignment: Alignment.centerLeft,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: Insets.lg),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (implyLeading) ...[
+                MenoTertiaryButton.icon(
+                  label: Text(backLabelText ?? 'Back'),
+                  icon: const Icon(MIcons.chevron_left),
+                  onPressed: onBackButtonPressed,
+                  size: MenoSize.xs,
+                  style: ButtonStyle(
+                    textStyle: Internal.all(style.leadingTextStyle),
+                    padding: Internal.all(EdgeInsets.zero),
+                    foregroundColor: Internal.all(style.leadingColor),
+                  ),
+                ),
+                const SizedBox(height: Insets.lg),
+              ],
+              Text(title, style: titleTextStyle),
+            ],
+          ),
+        ),
+        Positioned(
+          right: 0,
+          bottom: 0,
+          child: MenoAssets.images.geometricLines.svg(colorFilter: colorFilter),
+        ),
+      ],
+    );
+  }
+}
+
+class _SecondaryTopBar extends MenoTopBar {
+  _SecondaryTopBar({
+    required super.title,
+    super.key,
+    super.actions,
+    super.onBackButtonPressed,
+    super.centerTitle,
+    super.titleSize,
+  }) : super._(
+         topBarHeight: 57,
+         leading: _SecondaryBackButton(onPressed: onBackButtonPressed),
+       );
+
+  @override
+  TopBarStyle defaultStyleOf(BuildContext context) {
+    return MenoTopBarTheme.of(context).secondary;
+  }
+
+  @override
+  TopBarStyle? themeStyleOf(BuildContext context) {
+    return MenoTopBarTheme.of(context).secondary;
+  }
+}
+
+class _SecondaryBackButton extends StatelessWidget {
+  const _SecondaryBackButton({required this.onPressed});
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final style = MenoTopBarTheme.of(context).secondary;
+    return Align(
+      alignment: Alignment.centerRight,
+      child: IconButton(
+        onPressed: onPressed ?? () => Navigator.maybePop(context),
+        icon: const Icon(MIcons.chevron_left, size: 26),
+        style: IconButton.styleFrom(
+          foregroundColor: style.leadingColor,
+          maximumSize: const Size(24, 24),
+          minimumSize: Size.zero,
+          padding: EdgeInsets.zero,
+        ),
+      ),
+    );
+  }
 }
