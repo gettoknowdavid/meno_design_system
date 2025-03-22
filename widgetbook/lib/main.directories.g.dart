@@ -31,8 +31,16 @@ import 'package:widgetbook_workspace/src/components/inputs/meno_textbox.dart'
     as _i10;
 import 'package:widgetbook_workspace/src/components/inputs/meno_textfield.dart'
     as _i11;
-import 'package:widgetbook_workspace/src/components/navigations/meno_top_bar.dart'
+import 'package:widgetbook_workspace/src/components/navigations/meno_primary_header.dart'
     as _i12;
+import 'package:widgetbook_workspace/src/components/navigations/meno_primary_header_large.dart'
+    as _i13;
+import 'package:widgetbook_workspace/src/components/navigations/meno_secondary_header.dart'
+    as _i14;
+import 'package:widgetbook_workspace/src/components/navigations/meno_secondary_header_large.dart'
+    as _i15;
+import 'package:widgetbook_workspace/src/components/navigations/meno_top_bar.dart'
+    as _i16;
 
 final directories = <_i1.WidgetbookNode>[
   _i1.WidgetbookFolder(
@@ -122,13 +130,39 @@ final directories = <_i1.WidgetbookNode>[
         name: 'navigations',
         children: [
           _i1.WidgetbookFolder(
+            name: 'header',
+            children: [
+              _i1.WidgetbookComponent(
+                name: 'MenoHeader',
+                useCases: [
+                  _i1.WidgetbookUseCase(
+                    name: 'PrimaryHeader',
+                    builder: _i12.buildPrimaryHeaderUseCase,
+                  ),
+                  _i1.WidgetbookUseCase(
+                    name: 'PrimaryHeaderLarge',
+                    builder: _i13.buildPrimaryHeaderLargeUseCase,
+                  ),
+                  _i1.WidgetbookUseCase(
+                    name: 'SecondaryHeader',
+                    builder: _i14.buildSecondaryHeaderUseCase,
+                  ),
+                  _i1.WidgetbookUseCase(
+                    name: 'SecondaryHeaderLarge',
+                    builder: _i15.buildSecondaryLargeHeaderUseCase,
+                  ),
+                ],
+              ),
+            ],
+          ),
+          _i1.WidgetbookFolder(
             name: 'top_bar',
             children: [
               _i1.WidgetbookLeafComponent(
                 name: 'MenoTopBar',
                 useCase: _i1.WidgetbookUseCase(
                   name: 'TopBar',
-                  builder: _i12.buildTopBarUseCase,
+                  builder: _i16.buildTopBarUseCase,
                 ),
               ),
             ],

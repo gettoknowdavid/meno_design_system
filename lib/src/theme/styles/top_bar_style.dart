@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:meno_design_system/meno_design_system.dart';
 
@@ -49,17 +51,17 @@ class TopBarStyle {
   static TopBarStyle? lerp(TopBarStyle? a, TopBarStyle? b, double t) {
     if (identical(a, b)) return a;
     return TopBarStyle(
-      topbarHeight: b!.topbarHeight,
-      backgroundColor: Color.lerp(a?.backgroundColor, b.backgroundColor, t),
-      titleColor: Color.lerp(a?.titleColor, b.titleColor, t),
-      leadingColor: Color.lerp(a?.leadingColor, b.leadingColor, t),
-      actionColor: Color.lerp(a?.actionColor, b.actionColor, t),
-      accentColor: Color.lerp(a?.accentColor, b.accentColor, t),
-      bottomBorder: ShapeBorder.lerp(a?.bottomBorder, b.bottomBorder, t),
-      textStyle: TextStyle.lerp(a?.textStyle, b.textStyle, t),
+      topbarHeight: lerpDouble(a?.topbarHeight, b?.topbarHeight, t),
+      backgroundColor: Color.lerp(a?.backgroundColor, b?.backgroundColor, t),
+      titleColor: Color.lerp(a?.titleColor, b?.titleColor, t),
+      leadingColor: Color.lerp(a?.leadingColor, b?.leadingColor, t),
+      actionColor: Color.lerp(a?.actionColor, b?.actionColor, t),
+      accentColor: Color.lerp(a?.accentColor, b?.accentColor, t),
+      bottomBorder: ShapeBorder.lerp(a?.bottomBorder, b?.bottomBorder, t),
+      textStyle: TextStyle.lerp(a?.textStyle, b?.textStyle, t),
       leadingTextStyle: TextStyle.lerp(
         a?.leadingTextStyle,
-        b.leadingTextStyle,
+        b?.leadingTextStyle,
         t,
       ),
     );

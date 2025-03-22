@@ -13,6 +13,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
     required this.buttonTheme,
     required this.inputTheme,
     required this.topBarTheme,
+    required this.headerTheme,
   });
 
   /// Retrieves the [MenoTheme] extension from the closest [Theme] instance
@@ -48,6 +49,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
     final buttonTheme = MenoButtonTheme.$default(colors);
     final inputTheme = MenoInputTheme.$default(colors, textTheme);
     final topBarTheme = MenoTopBarTheme.$default(colors, textTheme);
+    final headerTheme = MenoHeaderTheme.$default(colors, textTheme);
 
     return MenoTheme(
       colors: colors,
@@ -55,6 +57,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
       buttonTheme: buttonTheme,
       inputTheme: inputTheme,
       topBarTheme: topBarTheme,
+      headerTheme:headerTheme,
     );
   }
 
@@ -96,6 +99,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
     ThemeExtension<MenoButtonTheme>? buttonTheme,
     ThemeExtension<MenoInputTheme>? inputTheme,
     ThemeExtension<MenoTopBarTheme>? topBarTheme,
+    ThemeExtension<MenoHeaderTheme>? headerTheme,
   }) {
     return MenoTheme(
       colors: colors ?? this.colors,
@@ -103,6 +107,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
       buttonTheme: buttonTheme ?? this.buttonTheme,
       inputTheme: inputTheme ?? this.inputTheme,
       topBarTheme: topBarTheme ?? this.topBarTheme,
+      headerTheme: headerTheme ?? this.headerTheme,
     );
   }
 
@@ -121,6 +126,9 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
   /// [MenoTopBarTheme] instance provides configuration for [AppBar]s
   final ThemeExtension<MenoTopBarTheme> topBarTheme;
 
+  /// [MenoHeaderTheme] instance provides configuration for [AppBar]s
+  final ThemeExtension<MenoHeaderTheme> headerTheme;
+
   @override
   ThemeExtension<MenoTheme> lerp(
     covariant ThemeExtension<MenoTheme>? other,
@@ -133,6 +141,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
       buttonTheme: buttonTheme.lerp(other.buttonTheme, t),
       inputTheme: inputTheme.lerp(other.inputTheme, t),
       topBarTheme: topBarTheme.lerp(other.topBarTheme, t),
+      headerTheme: headerTheme.lerp(other.headerTheme, t),
     );
   }
 }

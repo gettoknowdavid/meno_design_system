@@ -15,7 +15,7 @@ class SecondaryTopBar extends StatelessWidget {
     this.centerTitle = false,
   });
 
-/// Title of the top bar
+  /// Title of the top bar
   final String title;
 
   /// Size of the top bar title
@@ -32,34 +32,32 @@ class SecondaryTopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = MenoTopBarTheme.of(context).secondary;
+    final theme = MenoTopBarTheme.of(context).secondary;
     final textTheme = MenoTextTheme.of(context);
 
     late final titleTextStyle = switch (titleSize) {
       TopBarTitleSize.large => textTheme.heading3Medium,
-      _ => style.textStyle,
+      _ => theme.textStyle,
     };
 
     return AppBar(
-      backgroundColor: style.backgroundColor,
-      foregroundColor: style.titleColor,
+      backgroundColor: theme.backgroundColor,
+      foregroundColor: theme.titleColor,
       titleTextStyle: titleTextStyle,
-      actionsIconTheme: IconThemeData(color: style.actionColor),
+      actionsIconTheme: IconThemeData(color: theme.actionColor),
       titleSpacing: Insets.xs,
       leadingWidth: 40,
-      shape: style.bottomBorder,
+      shape: theme.bottomBorder,
       leading: Align(
         alignment: Alignment.centerRight,
         child: IconButton(
           onPressed: onBackButtonPressed ?? () => Navigator.maybePop(context),
-          icon: const Icon(Icons.chevron_left, size: 26),
+          icon: const Icon(MIcons.chevron_left, size: 26),
           style: IconButton.styleFrom(
-            foregroundColor: style.leadingColor,
+            foregroundColor: theme.leadingColor,
             maximumSize: const Size(24, 24),
             minimumSize: Size.zero,
             padding: EdgeInsets.zero,
-            visualDensity: VisualDensity.compact,
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),
         ),
       ),
