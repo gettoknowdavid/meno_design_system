@@ -35,12 +35,14 @@ import 'package:widgetbook_workspace/src/components/navigations/meno_primary_hea
     as _i12;
 import 'package:widgetbook_workspace/src/components/navigations/meno_primary_header_large.dart'
     as _i13;
+import 'package:widgetbook_workspace/src/components/navigations/meno_primary_top_bar.dart'
+    as _i16;
 import 'package:widgetbook_workspace/src/components/navigations/meno_secondary_header.dart'
     as _i14;
 import 'package:widgetbook_workspace/src/components/navigations/meno_secondary_header_large.dart'
     as _i15;
-import 'package:widgetbook_workspace/src/components/navigations/meno_top_bar.dart'
-    as _i16;
+import 'package:widgetbook_workspace/src/components/navigations/meno_secondary_top_bar.dart'
+    as _i17;
 
 final directories = <_i1.WidgetbookNode>[
   _i1.WidgetbookFolder(
@@ -158,12 +160,18 @@ final directories = <_i1.WidgetbookNode>[
           _i1.WidgetbookFolder(
             name: 'top_bar',
             children: [
-              _i1.WidgetbookLeafComponent(
+              _i1.WidgetbookComponent(
                 name: 'MenoTopBar',
-                useCase: _i1.WidgetbookUseCase(
-                  name: 'TopBar',
-                  builder: _i16.buildTopBarUseCase,
-                ),
+                useCases: [
+                  _i1.WidgetbookUseCase(
+                    name: 'PrimaryTopBar',
+                    builder: _i16.buildPrimaryTopBarUseCase,
+                  ),
+                  _i1.WidgetbookUseCase(
+                    name: 'SecondaryTopBar',
+                    builder: _i17.buildSecondaryTopBarUseCase,
+                  ),
+                ],
               ),
             ],
           ),
