@@ -20,7 +20,7 @@ class MenoInputLabel extends StatelessWidget {
   final String data;
 
   /// The optional icon
-  final Widget? icon;
+  final IconData? icon;
 
   /// Optional [TextStyle] for custom styling
   final TextStyle? style;
@@ -46,7 +46,7 @@ class MenoInputLabel extends StatelessWidget {
         if (icon != null) ...[
           IconTheme(
             data: IconThemeData(size: Insets.lg, color: effectiveColor),
-            child: icon!,
+            child: Icon(icon),
           ),
           const SizedBox(width: 6),
         ],
