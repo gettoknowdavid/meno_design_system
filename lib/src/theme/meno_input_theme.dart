@@ -13,6 +13,7 @@ class MenoInputTheme extends ThemeExtension<MenoInputTheme> {
     required this.counterTextStyle,
     required this.validationTextStyle,
     required this.defaultColor,
+    required this.activeColor,
     required this.errorColor,
     required this.focusedColor,
     required this.focusedLabelColor,
@@ -59,6 +60,7 @@ class MenoInputTheme extends ThemeExtension<MenoInputTheme> {
         }
         return baseTextStyle.copyWith(color: color);
       }),
+      activeColor: colors.labelPrimary,
       defaultColor: colors.strokeSoft,
       disabledColor: colors.disabledLight,
       errorColor: colors.errorBase,
@@ -122,6 +124,9 @@ class MenoInputTheme extends ThemeExtension<MenoInputTheme> {
   /// Disabled border color of the [MenoTextfield]
   final Color disabledColor;
 
+  /// Active color of the [MenoTextfield]
+  final Color activeColor;
+
   /// Color of the [MenoTextfield] container
   final Color fillColor;
 
@@ -154,6 +159,7 @@ class MenoInputTheme extends ThemeExtension<MenoInputTheme> {
     TextStyle? validationTextStyle,
     TextStyle? counterTextStyle,
     Color? defaultColor,
+    Color? activeColor,
     Color? errorColor,
     Color? focusedColor,
     Color? focusedLabelColor,
@@ -173,6 +179,7 @@ class MenoInputTheme extends ThemeExtension<MenoInputTheme> {
       counterTextStyle: counterTextStyle ?? this.counterTextStyle,
       validationTextStyle: validationTextStyle ?? this.validationTextStyle,
       defaultColor: defaultColor ?? this.defaultColor,
+      activeColor: activeColor ?? this.activeColor,
       errorColor: errorColor ?? this.errorColor,
       focusedColor: focusedColor ?? this.focusedColor,
       focusedLabelColor: focusedLabelColor ?? this.focusedLabelColor,
@@ -204,6 +211,7 @@ class MenoInputTheme extends ThemeExtension<MenoInputTheme> {
       validationTextStyle:
           TextStyle.lerp(validationTextStyle, other.validationTextStyle, t)!,
       defaultColor: Color.lerp(defaultColor, other.defaultColor, t)!,
+      activeColor: Color.lerp(activeColor, other.activeColor, t)!,
       errorColor: Color.lerp(errorColor, other.errorColor, t)!,
       focusedColor: Color.lerp(focusedColor, other.focusedColor, t)!,
       focusedLabelColor:
