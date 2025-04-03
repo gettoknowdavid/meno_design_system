@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:meno_design_system/src/assets/fonts.gen.dart';
-import 'package:meno_design_system/src/core/colors/meno_color_scheme.dart';
 
 /// {@template meno_text_styles}
 /// Text styles for the app
@@ -8,115 +7,302 @@ import 'package:meno_design_system/src/core/colors/meno_color_scheme.dart';
 @immutable
 class MenoTextStyles {
   /// {@macro meno_theme}
-  const MenoTextStyles({required this.colors});
+  const MenoTextStyles._();
 
-  /// Get colors from Material [ColorScheme]
-  final MenoColorScheme colors;
-
-  /// Returns a `TextStyle` with predefined parameters
-  TextStyle _style({
-    required double fontSize,
-    required double height,
-    FontWeight fontWeight = FontWeight.w400,
-  }) {
-    return TextStyle(
-      fontSize: fontSize,
-      height: height,
-      fontFamily: FontFamily.sFProDisplay,
-      fontWeight: fontWeight,
-      color: colors.materialColorScheme.onSurface,
-      letterSpacing: 0,
-    );
-  }
+  /// Heading 1
+  static const TextStyle heading1 = TextStyle(
+    fontSize: 32,
+    height: 40.0 / 32.0,
+    fontWeight: FontWeight.w400,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
 
   /// Heading 1 Regular
-  TextStyle get heading1Regular => _style(fontSize: 32, height: 40.0 / 32.0);
+  static const TextStyle heading1Regular = TextStyle(
+    fontSize: 32,
+    height: 40.0 / 32.0,
+    fontWeight: FontWeight.w400,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
 
   /// Heading 1 Medium
-  TextStyle get heading1Medium =>
-      _style(fontSize: 32, height: 40.0 / 32.0, fontWeight: FontWeight.w500);
+  static const TextStyle heading1Medium = TextStyle(
+    fontSize: 32,
+    height: 40.0 / 32.0,
+    fontWeight: FontWeight.w500,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
 
   /// Heading 1 Bold
-  TextStyle get heading1Bold =>
-      _style(fontSize: 32, height: 40.0 / 32.0, fontWeight: FontWeight.bold);
+  static const TextStyle heading1Bold = TextStyle(
+    fontSize: 32,
+    height: 40.0 / 32.0,
+    fontWeight: FontWeight.bold,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
+
+  /// Heading 2
+  static const TextStyle heading2 = TextStyle(
+    fontSize: 24,
+    height: 32.0 / 24.0,
+    fontWeight: FontWeight.w400,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
 
   /// Heading 2 Regular
-  TextStyle get heading2Regular => _style(fontSize: 24, height: 32.0 / 24.0);
+  static const TextStyle heading2Regular = TextStyle(
+    fontSize: 24,
+    height: 32.0 / 24.0,
+    fontWeight: FontWeight.w400,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
 
   /// Heading 2 Medium
-  TextStyle get heading2Medium =>
-      _style(fontSize: 24, height: 32.0 / 24.0, fontWeight: FontWeight.w500);
+  static const TextStyle heading2Medium = TextStyle(
+    fontSize: 24,
+    height: 32.0 / 24.0,
+    fontWeight: FontWeight.w500,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
 
   /// Heading 2 Bold
-  TextStyle get heading2Bold =>
-      _style(fontSize: 24, height: 32.0 / 24.0, fontWeight: FontWeight.bold);
-  
+  static const TextStyle heading2Bold = TextStyle(
+    fontSize: 24,
+    height: 32.0 / 24.0,
+    fontWeight: FontWeight.bold,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
+
+  /// Heading 3 
+  static const TextStyle heading3 = TextStyle(
+    fontSize: 20,
+    height: 30.0 / 20.0,
+    fontWeight: FontWeight.w400,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
+
   /// Heading 3 Regular
-  TextStyle get heading3Regular => _style(fontSize: 20, height: 30.0 / 20.0);
+  static const TextStyle heading3Regular = TextStyle(
+    fontSize: 20,
+    height: 30.0 / 20.0,
+    fontWeight: FontWeight.w400,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
 
   /// Heading 3 Medium
-  TextStyle get heading3Medium =>
-      _style(fontSize: 20, height: 30.0 / 20.0, fontWeight: FontWeight.w500);
+  static const TextStyle heading3Medium = TextStyle(
+    fontSize: 20,
+    height: 30.0 / 20.0,
+    fontWeight: FontWeight.w500,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
 
   /// Heading 3 Bold
-  TextStyle get heading3Bold =>
-      _style(fontSize: 20, height: 30.0 / 20.0, fontWeight: FontWeight.bold);
+  static const TextStyle heading3Bold = TextStyle(
+    fontSize: 20,
+    height: 30.0 / 20.0,
+    fontWeight: FontWeight.bold,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
+
+  /// Subheading 
+  static const TextStyle subheading = TextStyle(
+    fontSize: 16,
+    height: 24.0 / 16.0,
+    fontWeight: FontWeight.w400,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
 
   /// Subheading Regular
-  TextStyle get subheadingRegular => _style(fontSize: 16, height: 24.0 / 16.0);
+  static const TextStyle subheadingRegular = TextStyle(
+    fontSize: 16,
+    height: 24.0 / 16.0,
+    fontWeight: FontWeight.w400,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
 
   /// Subheading Medium
-  TextStyle get subheadingMedium =>
-      _style(fontSize: 16, height: 24.0 / 16.0, fontWeight: FontWeight.w500);
+  static const TextStyle subheadingMedium = TextStyle(
+    fontSize: 16,
+    height: 24.0 / 16.0,
+    fontWeight: FontWeight.w500,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
 
   /// Subheading Bold
-  TextStyle get subheadingBold =>
-      _style(fontSize: 16, height: 24.0 / 16.0, fontWeight: FontWeight.bold);
+  static const TextStyle subheadingBold = TextStyle(
+    fontSize: 16,
+    height: 24.0 / 16.0,
+    fontWeight: FontWeight.bold,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
+
+  /// Body
+  static const TextStyle body = TextStyle(
+    fontSize: 16,
+    height: 24.0 / 16.0,
+    fontWeight: FontWeight.w400,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
 
   /// Body Regular
-  TextStyle get bodyRegular => _style(fontSize: 16, height: 24.0 / 16.0);
+  static const TextStyle bodyRegular = TextStyle(
+    fontSize: 16,
+    height: 24.0 / 16.0,
+    fontWeight: FontWeight.w400,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
 
   /// Body Medium
-  TextStyle get bodyMedium =>
-      _style(fontSize: 16, height: 24.0 / 16.0, fontWeight: FontWeight.w500);
+  static const TextStyle bodyMedium = TextStyle(
+    fontSize: 16,
+    height: 24.0 / 16.0,
+    fontWeight: FontWeight.w500,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
 
   /// Body Bold
-  TextStyle get bodyBold =>
-      _style(fontSize: 16, height: 24.0 / 16.0, fontWeight: FontWeight.bold);
+  static const TextStyle bodyBold = TextStyle(
+    fontSize: 16,
+    height: 24.0 / 16.0,
+    fontWeight: FontWeight.bold,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
+
+  /// Caption
+  static const TextStyle caption = TextStyle(
+    fontSize: 14,
+    height: 16.0 / 14.0,
+    fontWeight: FontWeight.w400,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
 
   /// Caption Regular
-  TextStyle get captionRegular => _style(fontSize: 14, height: 16.0 / 14.0);
+  static const TextStyle captionRegular = TextStyle(
+    fontSize: 14,
+    height: 16.0 / 14.0,
+    fontWeight: FontWeight.w400,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
 
   /// Caption Medium
-  TextStyle get captionMedium =>
-      _style(fontSize: 14, height: 16.0 / 14.0, fontWeight: FontWeight.w500);
+  static const TextStyle captionMedium = TextStyle(
+    fontSize: 14,
+    height: 16.0 / 14.0,
+    fontWeight: FontWeight.w500,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
 
   /// Caption Bold
-  TextStyle get captionBold =>
-      _style(fontSize: 14, height: 16.0 / 14.0, fontWeight: FontWeight.bold);
+  static const TextStyle captionBold = TextStyle(
+    fontSize: 14,
+    height: 16.0 / 14.0,
+    fontWeight: FontWeight.bold,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
+
+  /// Micro
+  static const TextStyle micro = TextStyle(
+    fontSize: 12,
+    height: 16.0 / 12.0,
+    fontWeight: FontWeight.w400,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
 
   /// Micro Regular
-  TextStyle get microRegular => _style(fontSize: 12, height: 16.0 / 12.0);
+  static const TextStyle microRegular = TextStyle(
+    fontSize: 12,
+    height: 16.0 / 12.0,
+    fontWeight: FontWeight.w400,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
 
   /// Micro Medium
-  TextStyle get microMedium =>
-      _style(fontSize: 12, height: 16.0 / 12.0, fontWeight: FontWeight.w500);
+  static const TextStyle microMedium = TextStyle(
+    fontSize: 12,
+    height: 16.0 / 12.0,
+    fontWeight: FontWeight.w500,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
 
   /// Micro Bold
-  TextStyle get microBold =>
-      _style(fontSize: 12, height: 16.0 / 12.0, fontWeight: FontWeight.bold);
+  static const TextStyle microBold = TextStyle(
+    fontSize: 12,
+    height: 16.0 / 12.0,
+    fontWeight: FontWeight.bold,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
+
+  /// Nano
+  static const TextStyle nano = TextStyle(
+    fontSize: 10,
+    height: 14.0 / 10.0,
+    fontWeight: FontWeight.w400,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
 
   /// Nano Regular
-  TextStyle get nanoRegular => _style(fontSize: 10, height: 14.0 / 10.0);
+  static const TextStyle nanoRegular = TextStyle(
+    fontSize: 10,
+    height: 14.0 / 10.0,
+    fontWeight: FontWeight.w400,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
 
   /// Nano Medium
-  TextStyle get nanoMedium =>
-      _style(fontSize: 10, height: 14.0 / 10.0, fontWeight: FontWeight.w500);
+  static const TextStyle nanoMedium = TextStyle(
+    fontSize: 10,
+    height: 14.0 / 10.0,
+    fontWeight: FontWeight.w500,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
 
   /// Nano Bold
-  TextStyle get nanoBold =>
-      _style(fontSize: 10, height: 14.0 / 10.0, fontWeight: FontWeight.bold);
+  static const TextStyle nanoBold = TextStyle(
+    fontSize: 10,
+    height: 14.0 / 10.0,
+    fontWeight: FontWeight.bold,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
 
   /// Button
-  TextStyle get button => _style(fontSize: 8, height: 16.0 / 8.0);
+  static const TextStyle button = TextStyle(
+    fontSize: 8,
+    height: 16.0 / 8.0,
+    fontWeight: FontWeight.w500,
+    fontFamily: FontFamily.sFProDisplay,
+    letterSpacing: 0,
+  );
 }

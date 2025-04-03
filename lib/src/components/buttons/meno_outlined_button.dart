@@ -3,7 +3,7 @@ import 'package:meno_design_system/meno_design_system.dart';
 import 'package:meno_design_system/src/components/buttons/base_button.dart';
 
 /// {@template meno_outlined_button}
-/// A custom secondary text button widget that adapts to the platform.
+/// A custom Outlined text button widget that adapts to the platform.
 /// {@endtemplate}
 class MenoOutlinedButton extends OutlinedButton {
   /// {@macro meno_outlined_button}
@@ -25,6 +25,66 @@ class MenoOutlinedButton extends OutlinedButton {
          child: isLoading ? MenoLoadingIndicatorBySize(size) : child,
          onPressed: disabled || isLoading ? null : onPressed,
        );
+
+  /// Create an outlined button from [icon] and [label].
+  ///
+  /// The icon and label are arranged in a row with padding at the start and end
+  /// and a gap between them.
+  ///
+  /// If [icon] is null, will create a [MenoOutlinedButton] instead.
+  ///
+  factory MenoOutlinedButton.icon({
+    required Widget label,
+    required VoidCallback? onPressed,
+    MenoSize size = MenoSize.md,
+    bool isLoading = false,
+    bool disabled = false,
+    Key? key,
+    VoidCallback? onLongPress,
+    ValueChanged<bool>? onHover,
+    ValueChanged<bool>? onFocusChange,
+    ButtonStyle? style,
+    FocusNode? focusNode,
+    bool? autofocus,
+    Clip? clipBehavior,
+    Widget? icon,
+    IconAlignment? iconAlignment = IconAlignment.start,
+  }) {
+    if (icon == null) {
+      return MenoOutlinedButton(
+        key: key,
+        onPressed: onPressed,
+        size: size,
+        isLoading: isLoading,
+        disabled: disabled,
+        onLongPress: onLongPress,
+        onHover: onHover,
+        onFocusChange: onFocusChange,
+        style: style,
+        focusNode: focusNode,
+        autofocus: autofocus ?? false,
+        clipBehavior: clipBehavior ?? Clip.none,
+        child: label,
+      );
+    }
+    return _MenoOutlinedButtonWithIcon(
+      key: key,
+      onPressed: onPressed,
+      label: label,
+      size: size,
+      isLoading: isLoading,
+      disabled: disabled,
+      onLongPress: onLongPress,
+      onHover: onHover,
+      onFocusChange: onFocusChange,
+      style: style,
+      focusNode: focusNode,
+      autofocus: autofocus,
+      clipBehavior: clipBehavior,
+      icon: icon,
+      iconAlignment: iconAlignment,
+    );
+  }
 
   /// The size of the button
   ///
@@ -87,4 +147,35 @@ class _MenoOutlinedButtonDefaultStyle extends ButtonStyle {
 
   @override
   WidgetStateProperty<OutlinedBorder>? get shape => BaseButton.border(size);
+}
+
+class _MenoOutlinedButtonWithIcon extends MenoOutlinedButton {
+  _MenoOutlinedButtonWithIcon({
+    required VoidCallback? onPressed,
+    required Widget icon,
+    required Widget label,
+    super.size,
+    super.key,
+    super.onLongPress,
+    super.onHover,
+    super.onFocusChange,
+    super.style,
+    super.focusNode,
+    bool? autofocus,
+    super.clipBehavior,
+    bool isLoading = false,
+    IconAlignment? iconAlignment,
+    super.disabled,
+  }) : super(
+         autofocus: autofocus ?? false,
+         onPressed: disabled || isLoading ? null : onPressed,
+         child: BaseButtonWithIcon(
+           label: label,
+           icon: icon,
+           style: style,
+           iconAlignment: iconAlignment,
+           size: size,
+           isLoading: isLoading,
+         ),
+       );
 }

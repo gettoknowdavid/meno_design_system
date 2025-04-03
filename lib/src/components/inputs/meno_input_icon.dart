@@ -29,10 +29,10 @@ class MenoInputIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     late final iconSize = switch (size) {
-      MenoSize.xs => 14.0,
-      MenoSize.sm => 14.0,
-      MenoSize.md => 16.0,
-      MenoSize.lg => 18.0,
+      MenoSize.xs => 16.0,
+      MenoSize.sm => 16.0,
+      MenoSize.md => 18.0,
+      MenoSize.lg => 20.0,
     };
 
     late final padding = switch (size) {

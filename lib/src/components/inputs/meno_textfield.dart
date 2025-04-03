@@ -57,7 +57,7 @@ class MenoTextfield extends FormField<String> {
              label: label,
              hasError: field.hasError || !field.isValid,
              errorText: field.errorText,
-             isEmpty: field.value?.isEmpty ?? false,
+             isEmpty: field.value == null && (field.value?.isEmpty ?? true),
              validator: validator,
              initialValue: initialValue,
              required: required,
@@ -161,9 +161,9 @@ EdgeInsetsGeometry _contentPadding(MenoSize size) {
 
 BoxConstraints _iconConstraints(MenoSize size) {
   return switch (size) {
-    MenoSize.lg => BoxConstraints.tight(const Size(32, 48)),
-    MenoSize.md => BoxConstraints.tight(const Size(28, 40)),
-    _ => BoxConstraints.tight(const Size(24, 32)),
+    MenoSize.lg => BoxConstraints.tight(const Size(34, 48)),
+    MenoSize.md => BoxConstraints.tight(const Size(30, 40)),
+    _ => BoxConstraints.tight(const Size(26, 32)),
   };
 }
 
@@ -229,10 +229,10 @@ class _TextfieldWidget extends HookWidget {
     }, [focus]);
 
     final effectiveColor = useMemoized(() {
-      if (hasError) return theme.errorColor;
+      // if (hasError) return theme.errorColor;
       if (!enabled) return theme.disabledColor;
       if (hasFocus.value) return theme.focusedLabelColor;
-      if (isEmpty) return theme.defaultColor;
+      if (!isEmpty) return theme.activeColor;
       return theme.defaultColor;
     }, [hasError, enabled, hasFocus, isEmpty, theme]);
 
@@ -287,6 +287,7 @@ class _TextfieldWidget extends HookWidget {
                     ? PasswordEye(
                       obscureText: obscureText.value,
                       onToggle: (value) => obscureText.value = value,
+                      size: size,
                     )
                     : null,
           ),

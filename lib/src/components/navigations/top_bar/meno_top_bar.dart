@@ -16,7 +16,7 @@ class MenoTopBar extends BaseTopBar {
     super.onBackButtonPressed,
     super.centerTitle = false,
     super.actions,
-    super.implyLeading = true,
+    super.implyLeading,
     super.backLabelText,
     super.leading,
     super.flexibleSpace,
@@ -27,7 +27,7 @@ class MenoTopBar extends BaseTopBar {
     required String title,
     Key? key,
     String? backLabelText,
-    bool implyLeading = false,
+    bool? implyLeading,
     VoidCallback? onBackButtonPressed,
   }) {
     return MenoTopBar._(
@@ -76,13 +76,13 @@ class _PrimaryTopBar extends StatelessWidget {
   const _PrimaryTopBar({
     required this.title,
     super.key,
-    this.implyLeading = false,
+    this.implyLeading,
     this.backLabelText,
     this.onBackButtonPressed,
   });
 
   final String title;
-  final bool implyLeading;
+  final bool? implyLeading;
   final String? backLabelText;
   final VoidCallback? onBackButtonPressed;
 
@@ -91,41 +91,45 @@ class _PrimaryTopBar extends StatelessWidget {
     final style = MenoTopBarTheme.of(context).primary;
     final colorFilter = ColorFilter.mode(style.accentColor!, BlendMode.srcIn);
     final titleTextStyle = style.textStyle?.copyWith(color: style.titleColor);
-
-    return Stack(
-      fit: StackFit.passthrough,
-      alignment: Alignment.centerLeft,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: Insets.lg),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (implyLeading) ...[
-                MenoTertiaryButton.icon(
-                  label: Text(backLabelText ?? 'Back'),
-                  icon: const Icon(MIcons.chevron_left),
-                  onPressed: onBackButtonPressed,
-                  size: MenoSize.xs,
-                  style: ButtonStyle(
-                    textStyle: Internal.all(style.leadingTextStyle),
-                    padding: Internal.all(EdgeInsets.zero),
-                    foregroundColor: Internal.all(style.leadingColor),
+    final effectiveImplyLeading = implyLeading ?? Navigator.canPop(context);
+    return SafeArea(
+      child: Stack(
+        fit: StackFit.passthrough,
+        alignment: Alignment.centerLeft,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: Insets.lg),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (effectiveImplyLeading) ...[
+                  MenoTertiaryButton.icon(
+                    label: Text(backLabelText ?? 'Back'),
+                    icon: const Icon(MIcons.chevron_left),
+                    onPressed: onBackButtonPressed ?? Navigator.of(context).pop,
+                    size: MenoSize.xs,
+                    style: ButtonStyle(
+                      textStyle: Internal.all(style.leadingTextStyle),
+                      padding: Internal.all(EdgeInsets.zero),
+                      foregroundColor: Internal.all(style.leadingColor),
+                    ),
                   ),
-                ),
-                const SizedBox(height: Insets.lg),
+                  const SizedBox(height: Insets.lg),
+                ],
+                Text(title, style: titleTextStyle),
               ],
-              Text(title, style: titleTextStyle),
-            ],
+            ),
           ),
-        ),
-        Positioned(
-          right: 0,
-          bottom: 0,
-          child: MenoAssets.images.geometricLines.svg(colorFilter: colorFilter),
-        ),
-      ],
+          Positioned(
+            right: 0,
+            bottom: 0,
+            child: MenoAssets.images.geometricLines.svg(
+              colorFilter: colorFilter,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

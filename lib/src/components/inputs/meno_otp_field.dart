@@ -123,6 +123,7 @@ class MenoOtpField extends StatelessWidget {
       defaultPinTheme: defaultPinTheme,
       focusedPinTheme: focusedPinTheme,
       errorPinTheme: errorPinTheme,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
     );
   }
 }

@@ -14,6 +14,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
     required this.inputTheme,
     required this.topBarTheme,
     required this.headerTheme,
+    required this.snackbarTheme,
   });
 
   /// Retrieves the [MenoTheme] extension from the closest [Theme] instance
@@ -50,6 +51,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
     final inputTheme = MenoInputTheme.$default(colors, textTheme);
     final topBarTheme = MenoTopBarTheme.$default(colors, textTheme);
     final headerTheme = MenoHeaderTheme.$default(colors, textTheme);
+    final snackbarTheme = MenoSnackbarTheme.$default(colors);
 
     return MenoTheme(
       colors: colors,
@@ -57,7 +59,8 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
       buttonTheme: buttonTheme,
       inputTheme: inputTheme,
       topBarTheme: topBarTheme,
-      headerTheme:headerTheme,
+      headerTheme: headerTheme,
+      snackbarTheme: snackbarTheme,
     );
   }
 
@@ -70,25 +73,49 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
   /// {@macro meno_theme}
   static ThemeData _raw(Brightness brightness) {
     final colors = MenoColorScheme.$default(brightness);
+    final snackbar = MenoSnackbarTheme.$default(colors);
     final themeExtension = MenoTheme.$default(brightness);
-
     return ThemeData(
+      brightness: brightness,
       colorScheme: colors.materialColorScheme,
+      checkboxTheme: CheckboxThemeData(
+        checkColor: Internal.all(colors.buttonLabelPrimary),
+        fillColor: Internal.resolveWith(
+          Colors.transparent,
+          selected: colors.buttonFill,
+        ),
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        shape: const RoundedRectangleBorder(borderRadius: MenoBorderRadius.xs),
+        side: BorderSide(color: colors.strokeSoft),
+        visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
+      ),
       dividerTheme: DividerThemeData(
         color: colors.strokeSoft,
         thickness: 1,
         space: 0,
       ),
+      progressIndicatorTheme: ProgressIndicatorThemeData(
+        color: colors.brandPrimary,
+        borderRadius: const BorderRadius.all(Radius.circular(2)),
+        circularTrackColor: colors.brandPrimaryLighter,
+        linearMinHeight: 4,
+        linearTrackColor: colors.brandPrimaryLighter,
+      ),
+      snackBarTheme: SnackBarThemeData(
+        actionBackgroundColor: Colors.transparent,
+        actionTextColor: snackbar.foregroundColor,
+        backgroundColor: snackbar.backgroundColor,
+        behavior: SnackBarBehavior.floating,
+        shape: const RoundedRectangleBorder(borderRadius: MenoBorderRadius.sm),
+        contentTextStyle: snackbar.textStyle.copyWith(
+          color: snackbar.foregroundColor,
+        ),
+        elevation: snackbar.elevation,
+        insetPadding: snackbar.insetPadding,
+      ),
       visualDensity: VisualDensity.compact,
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      extensions: [
-        themeExtension,
-        themeExtension.buttonTheme,
-        themeExtension.colors,
-        themeExtension.textTheme,
-        themeExtension.inputTheme,
-        themeExtension.topBarTheme,
-      ],
+      extensions: [themeExtension],
     );
   }
 
@@ -100,6 +127,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
     ThemeExtension<MenoInputTheme>? inputTheme,
     ThemeExtension<MenoTopBarTheme>? topBarTheme,
     ThemeExtension<MenoHeaderTheme>? headerTheme,
+    ThemeExtension<MenoSnackbarTheme>? snackbarTheme,
   }) {
     return MenoTheme(
       colors: colors ?? this.colors,
@@ -108,6 +136,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
       inputTheme: inputTheme ?? this.inputTheme,
       topBarTheme: topBarTheme ?? this.topBarTheme,
       headerTheme: headerTheme ?? this.headerTheme,
+      snackbarTheme: snackbarTheme ?? this.snackbarTheme,
     );
   }
 
@@ -129,6 +158,9 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
   /// [MenoHeaderTheme] instance provides configuration for [AppBar]s
   final ThemeExtension<MenoHeaderTheme> headerTheme;
 
+  /// [MenoSnackbarTheme] instance provides configuration for [SnackBar]s
+  final ThemeExtension<MenoSnackbarTheme> snackbarTheme;
+
   @override
   ThemeExtension<MenoTheme> lerp(
     covariant ThemeExtension<MenoTheme>? other,
@@ -142,6 +174,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
       inputTheme: inputTheme.lerp(other.inputTheme, t),
       topBarTheme: topBarTheme.lerp(other.topBarTheme, t),
       headerTheme: headerTheme.lerp(other.headerTheme, t),
+      snackbarTheme: snackbarTheme.lerp(other.snackbarTheme, t),
     );
   }
 }
