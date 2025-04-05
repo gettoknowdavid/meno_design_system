@@ -81,7 +81,7 @@ class MenoTextStyles {
     letterSpacing: 0,
   );
 
-  /// Heading 3 
+  /// Heading 3
   static const TextStyle heading3 = TextStyle(
     fontSize: 20,
     height: 30.0 / 20.0,
@@ -117,7 +117,7 @@ class MenoTextStyles {
     letterSpacing: 0,
   );
 
-  /// Subheading 
+  /// Subheading
   static const TextStyle subheading = TextStyle(
     fontSize: 16,
     height: 24.0 / 16.0,

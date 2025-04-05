@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:meno_design_system/meno_design_system.dart';
-import 'package:meno_design_system/src/components/buttons/base_button.dart';
+import 'package:meno_design_system/meno_design_system.dart'
+    show
+        MenoButtonTheme,
+        MenoLoadingIndicator,
+        MenoLoadingIndicatorBySize,
+        MenoSize;
+import 'package:meno_design_system/src/components/buttons/buttons.dart';
 
 /// {@template meno_primary_button}
 /// A custom primary text button widget that adapts to the platform.

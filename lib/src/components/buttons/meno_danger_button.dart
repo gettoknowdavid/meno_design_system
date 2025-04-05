@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:meno_design_system/meno_design_system.dart';
-import 'package:meno_design_system/src/components/buttons/base_button.dart';
+import 'package:meno_design_system/meno_design_system.dart'
+    show
+        MenoButtonTheme,
+        MenoLoadingIndicator,
+        MenoLoadingIndicatorBySize,
+        MenoSize;
+import 'package:meno_design_system/src/components/buttons/buttons.dart';
 
 /// The variant of the danger button
 enum MenoDangerButtonVariant {

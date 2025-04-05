@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:meno_design_system/meno_design_system.dart';
+import 'package:meno_design_system/meno_design_system.dart'
+    show Internal, MenoSize;
+import 'package:meno_design_system/src/components/navigations/navigations.dart';
+import 'package:meno_design_system/src/theme/theme.dart';
 
 /// {@template base_meno_header}
 /// The BaseHeader
@@ -16,6 +19,7 @@ abstract class BaseHeader extends StatelessWidget
     this.actions,
     this.actionLabel,
     this.actionCallback,
+    this.margin,
   });
 
   /// The [MenoSize]
@@ -38,6 +42,9 @@ abstract class BaseHeader extends StatelessWidget
 
   /// Height of the header
   final double headerHeight;
+
+  /// Margin
+  final EdgeInsets? margin;
 
   /// The default styling of the header
   @protected
@@ -92,14 +99,13 @@ abstract class BaseHeader extends StatelessWidget
           height: headerHeight,
           width: double.infinity,
           padding: padding,
+          margin: margin,
           decoration: BoxDecoration(color: backgroundColor),
           child: Row(
             children: [
               if (showSideBorder ?? false) ...[
-                Container(
-                  height: double.infinity,
-                  constraints: const BoxConstraints(maxHeight: 36),
-                  width: sideBorderThickness,
+                MenoHeaderSideBar(
+                  thickness: sideBorderThickness,
                   color: sideBorderColor,
                 ),
                 SizedBox(width: titleStartGap),

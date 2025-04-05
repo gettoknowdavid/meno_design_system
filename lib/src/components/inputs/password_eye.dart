@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:meno_design_system/meno_design_system.dart';
-import 'package:meno_design_system/src/components/inputs/meno_input_icon.dart';
+import 'package:meno_design_system/meno_design_system.dart'
+    show MIcons, MenoSize;
+import 'package:meno_design_system/src/components/inputs/inputs.dart';
 
 /// {@template password_eye}
 /// A custom widget for enabling and disabling the [MenoTextfield]
@@ -33,7 +34,7 @@ class PasswordEye extends StatelessWidget {
     return GestureDetector(
       onTap: () => onToggle(!obscureText),
       child: MenoInputIcon(
-        obscureText ? MIcons.eye :MIcons.eye_off,
+        obscureText ? MIcons.eye : MIcons.eye_off,
         size: size,
         color: color,
         alignment: Alignment.centerLeft,

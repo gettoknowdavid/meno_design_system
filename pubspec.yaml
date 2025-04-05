@@ -8,6 +8,7 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  cached_network_image: ^3.4.1
   flutter:
     sdk: flutter
   flutter_gen: ^5.10.0
@@ -15,6 +16,7 @@ dependencies:
   flutter_svg: ^2.0.17
   meta: ^1.16.0
   pinput: ^5.0.1
+  skeletonizer: ^1.4.3
   vector_graphics: ^1.1.18
 
 dev_dependencies:
