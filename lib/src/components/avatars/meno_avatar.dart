@@ -17,7 +17,6 @@ class MenoAvatar extends HookWidget {
     this.radius = MenoAvatarRadius.xxlg,
     this.url,
     this.file,
-    this.child,
     this.onTap,
     this.hasBorder = false,
     this.isLoading = false,
@@ -40,12 +39,6 @@ class MenoAvatar extends HookWidget {
   /// If provided, this file will be used to display a local image in the
   /// avatar.
   final File? file;
-
-  /// A widget to display in the center of the avatar.
-  ///
-  /// This widget is displayed on top of the background image or color of the
-  /// avatar.
-  final Widget? child;
 
   /// A callback function to be called when the avatar is tapped.
   ///
