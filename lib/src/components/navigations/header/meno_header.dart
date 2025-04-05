@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:meno_design_system/meno_design_system.dart';
-import 'package:meno_design_system/src/components/navigations/header/base_header.dart';
+import 'package:meno_design_system/meno_design_system.dart' show Insets, MenoSize;
+import 'package:meno_design_system/src/components/navigations/navigations.dart';
+import 'package:meno_design_system/src/theme/theme.dart';
 
 /// {@template meno_header}
 /// The Meno Heder
@@ -14,6 +15,7 @@ class MenoHeader extends BaseHeader {
     super.actionCallback,
     super.actionLabel,
     super.size,
+    super.margin,
     super.key,
   });
 
@@ -49,15 +51,9 @@ class MenoHeader extends BaseHeader {
   factory MenoHeader.secondary({
     required Widget title,
     MenoSize size = MenoSize.md,
-    String? actionLabel,
-    VoidCallback? actionCallback,
+    List<Widget>? actions,
   }) {
-    return _SecondaryHeader(
-      size: size,
-      title: title,
-      actionCallback: actionCallback,
-      actionLabel: actionLabel,
-    );
+    return _SecondaryHeader(size: size, title: title, actions: actions);
   }
 
   /// Secondary Meno Header for Large layouts
@@ -99,18 +95,17 @@ class _PrimaryHeaderLarge extends MenoHeader {
 }
 
 class _SecondaryHeader extends MenoHeader {
-  _SecondaryHeader({
-    required super.size,
-    required super.title,
-    super.actionCallback,
-    super.actionLabel,
-  }) : super._(headerHeight: _headerHeight(size));
+  _SecondaryHeader({required super.size, required super.title, super.actions})
+    : super._(
+        headerHeight: _headerHeight(size),
+        margin: const EdgeInsets.only(top: Insets.sm),
+      );
 
   static double _headerHeight(MenoSize size) {
     return switch (size) {
-      MenoSize.md => 30,
-      MenoSize.lg => 36,
-      _ => 24,
+      MenoSize.md => 38,
+      MenoSize.lg => 44,
+      _ => 32,
     };
   }
 

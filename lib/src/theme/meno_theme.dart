@@ -15,6 +15,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
     required this.topBarTheme,
     required this.headerTheme,
     required this.snackbarTheme,
+    required this.navigationBarTheme,
   });
 
   /// Retrieves the [MenoTheme] extension from the closest [Theme] instance
@@ -52,6 +53,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
     final topBarTheme = MenoTopBarTheme.$default(colors, textTheme);
     final headerTheme = MenoHeaderTheme.$default(colors, textTheme);
     final snackbarTheme = MenoSnackbarTheme.$default(colors);
+    final navigationBarTheme = MenoNavigationBarTheme.$default(colors);
 
     return MenoTheme(
       colors: colors,
@@ -61,6 +63,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
       topBarTheme: topBarTheme,
       headerTheme: headerTheme,
       snackbarTheme: snackbarTheme,
+      navigationBarTheme: navigationBarTheme,
     );
   }
 
@@ -75,6 +78,8 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
     final colors = MenoColorScheme.$default(brightness);
     final snackbar = MenoSnackbarTheme.$default(colors);
     final themeExtension = MenoTheme.$default(brightness);
+    final navigationBarTheme = MenoNavigationBarTheme.$default(colors);
+
     return ThemeData(
       brightness: brightness,
       colorScheme: colors.materialColorScheme,
@@ -93,6 +98,18 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
         color: colors.strokeSoft,
         thickness: 1,
         space: 0,
+      ),
+      iconButtonTheme: IconButtonThemeData(
+        style: ButtonStyle(padding: Internal.all(EdgeInsets.zero)),
+      ),
+      navigationBarTheme: NavigationBarThemeData(
+        backgroundColor: navigationBarTheme.backgroundColor,
+        elevation: 0,
+        iconTheme: navigationBarTheme.iconTheme,
+        indicatorColor: navigationBarTheme.selectedColor,
+        labelTextStyle: navigationBarTheme.labelTextStyle,
+        labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+        height: 56,
       ),
       progressIndicatorTheme: ProgressIndicatorThemeData(
         color: colors.brandPrimary,
@@ -128,6 +145,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
     ThemeExtension<MenoTopBarTheme>? topBarTheme,
     ThemeExtension<MenoHeaderTheme>? headerTheme,
     ThemeExtension<MenoSnackbarTheme>? snackbarTheme,
+    ThemeExtension<MenoNavigationBarTheme>? navigationBarTheme,
   }) {
     return MenoTheme(
       colors: colors ?? this.colors,
@@ -137,6 +155,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
       topBarTheme: topBarTheme ?? this.topBarTheme,
       headerTheme: headerTheme ?? this.headerTheme,
       snackbarTheme: snackbarTheme ?? this.snackbarTheme,
+      navigationBarTheme: navigationBarTheme ?? this.navigationBarTheme,
     );
   }
 
@@ -161,6 +180,9 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
   /// [MenoSnackbarTheme] instance provides configuration for [SnackBar]s
   final ThemeExtension<MenoSnackbarTheme> snackbarTheme;
 
+  /// [MenoNavigationBarTheme] for Navigation bars
+  final ThemeExtension<MenoNavigationBarTheme> navigationBarTheme;
+
   @override
   ThemeExtension<MenoTheme> lerp(
     covariant ThemeExtension<MenoTheme>? other,
@@ -175,6 +197,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
       topBarTheme: topBarTheme.lerp(other.topBarTheme, t),
       headerTheme: headerTheme.lerp(other.headerTheme, t),
       snackbarTheme: snackbarTheme.lerp(other.snackbarTheme, t),
+      navigationBarTheme: navigationBarTheme.lerp(other.navigationBarTheme, t),
     );
   }
 }
