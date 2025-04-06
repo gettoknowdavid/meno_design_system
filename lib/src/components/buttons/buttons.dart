@@ -1,5 +1,5 @@
-export 'base_button.dart';
 export 'meno_danger_button.dart';
+export 'meno_icon_button.dart';
 export 'meno_microphone_button.dart';
 export 'meno_outlined_button.dart';
 export 'meno_primary_button.dart';
