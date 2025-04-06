@@ -5,7 +5,7 @@ import 'package:meno_design_system/meno_design_system.dart'
         MenoLoadingIndicator,
         MenoLoadingIndicatorBySize,
         MenoSize;
-import 'package:meno_design_system/src/components/buttons/buttons.dart';
+import 'package:meno_design_system/src/components/buttons/base_button.dart';
 
 /// {@template meno_success_button}
 /// A custom primary text button widget that adapts to the platform.

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meno_design_system/meno_design_system.dart';
+import 'package:meno_design_system/src/components/buttons/base_button.dart';
 
 /// {@template meno_outlined_button}
 /// A custom Outlined text button widget that adapts to the platform.
