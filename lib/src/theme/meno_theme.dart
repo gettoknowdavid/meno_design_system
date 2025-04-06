@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meno_design_system/meno_design_system.dart';
+import 'package:meno_design_system/src/theme/meno_tab_bar_theme.dart';
 
 /// {@template meno_theme}
 /// Configuration class which collects all Themes of app together and provides
@@ -16,6 +17,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
     required this.headerTheme,
     required this.snackbarTheme,
     required this.navigationBarTheme,
+    required this.tabBarTheme,
   });
 
   /// Retrieves the [MenoTheme] extension from the closest [Theme] instance
@@ -54,6 +56,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
     final headerTheme = MenoHeaderTheme.$default(colors, textTheme);
     final snackbarTheme = MenoSnackbarTheme.$default(colors);
     final navigationBarTheme = MenoNavigationBarTheme.$default(colors);
+    final tabBarTheme = MenoTabBarTheme.$default(colors);
 
     return MenoTheme(
       colors: colors,
@@ -64,6 +67,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
       headerTheme: headerTheme,
       snackbarTheme: snackbarTheme,
       navigationBarTheme: navigationBarTheme,
+     tabBarTheme:tabBarTheme,
     );
   }
 
@@ -146,6 +150,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
     ThemeExtension<MenoHeaderTheme>? headerTheme,
     ThemeExtension<MenoSnackbarTheme>? snackbarTheme,
     ThemeExtension<MenoNavigationBarTheme>? navigationBarTheme,
+    ThemeExtension<MenoTabBarTheme>? tabBarTheme,
   }) {
     return MenoTheme(
       colors: colors ?? this.colors,
@@ -156,6 +161,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
       headerTheme: headerTheme ?? this.headerTheme,
       snackbarTheme: snackbarTheme ?? this.snackbarTheme,
       navigationBarTheme: navigationBarTheme ?? this.navigationBarTheme,
+      tabBarTheme: tabBarTheme ?? this.tabBarTheme,
     );
   }
 
@@ -183,6 +189,9 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
   /// [MenoNavigationBarTheme] for Navigation bars
   final ThemeExtension<MenoNavigationBarTheme> navigationBarTheme;
 
+  /// [MenoTabBarTheme] for Tab bars
+  final ThemeExtension<MenoTabBarTheme> tabBarTheme;
+
   @override
   ThemeExtension<MenoTheme> lerp(
     covariant ThemeExtension<MenoTheme>? other,
@@ -198,6 +207,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
       headerTheme: headerTheme.lerp(other.headerTheme, t),
       snackbarTheme: snackbarTheme.lerp(other.snackbarTheme, t),
       navigationBarTheme: navigationBarTheme.lerp(other.navigationBarTheme, t),
+      tabBarTheme: tabBarTheme.lerp(other.tabBarTheme, t),
     );
   }
 }
