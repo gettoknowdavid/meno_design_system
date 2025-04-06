@@ -11,6 +11,7 @@ export 'src/components/navigations/navigations.dart';
 export 'src/components/progress_indicator/progress_indicator.dart';
 export 'src/components/snackbars/snackbars.dart';
 export 'src/components/spacer/spacer.dart';
+export 'src/components/tabs/tabs.dart';
 export 'src/components/tags/tags.dart';
 export 'src/components/typography/typography.dart';
 export 'src/core/colors/colors.dart';
