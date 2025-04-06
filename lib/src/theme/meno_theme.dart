@@ -67,7 +67,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
       headerTheme: headerTheme,
       snackbarTheme: snackbarTheme,
       navigationBarTheme: navigationBarTheme,
-     tabBarTheme:tabBarTheme,
+      tabBarTheme: tabBarTheme,
     );
   }
 
@@ -85,6 +85,15 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
     final navigationBarTheme = MenoNavigationBarTheme.$default(colors);
 
     return ThemeData(
+      bottomSheetTheme: BottomSheetThemeData(
+        backgroundColor: colors.sectionPrimary,
+        dragHandleColor: colors.labelPlaceholder,
+        modalBackgroundColor: colors.sectionPrimary,
+        showDragHandle: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
+        ),
+      ),
       brightness: brightness,
       colorScheme: colors.materialColorScheme,
       checkboxTheme: CheckboxThemeData(
