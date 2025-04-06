@@ -8,6 +8,7 @@ export 'src/components/buttons/buttons.dart';
 export 'src/components/indicators/indicators.dart';
 export 'src/components/inputs/inputs.dart';
 export 'src/components/list_tiles/list_tiles.dart';
+export 'src/components/modals/modals.dart';
 export 'src/components/navigations/navigations.dart';
 export 'src/components/progress_indicator/progress_indicator.dart';
 export 'src/components/snackbars/snackbars.dart';
