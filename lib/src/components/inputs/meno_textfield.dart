@@ -33,7 +33,7 @@ class MenoTextfield extends FormField<String> {
     this.autofocus = false,
     this.labelIcon,
     super.enabled = true,
-    this.required = true,
+    this.required = false,
   }) : super(
          builder: (field) {
            void onChangedHandler(String value) {

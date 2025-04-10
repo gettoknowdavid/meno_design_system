@@ -14,7 +14,8 @@ class MenoAvatar extends HookWidget {
   /// {@macro meno_avatar}
   const MenoAvatar({
     super.key,
-    this.radius = MenoAvatarRadius.xxlg,
+    this.menoRadius = MenoAvatarRadius.xxlg,
+    this.radius,
     this.url,
     this.file,
     this.onTap,
@@ -26,7 +27,10 @@ class MenoAvatar extends HookWidget {
   /// The radius of the avatar.
   ///
   /// This determines the size of the circular avatar.
-  final MenoAvatarRadius radius;
+  final MenoAvatarRadius menoRadius;
+
+  /// Optional radius value to set desired radius
+  final double? radius;
 
   /// The URL of the background image for the avatar.
   ///
@@ -74,19 +78,19 @@ class MenoAvatar extends HookWidget {
       );
     });
 
-    final radiusValue = radius.value;
+    final radiusValue = radius ?? menoRadius.value;
     final diameter = radiusValue * 2;
 
     final child = useMemoized(() {
-      if (isLoading) return _Skeleton(radius: radius);
+      if (isLoading) return _Skeleton(radius: radiusValue);
       return Stack(
         children: [
           if (!isLoading && file == null && url != null)
-            _CachedUrlImage(url: url, radius: radius)
+            _CachedUrlImage(url: url, radius: radiusValue)
           else if (!isLoading && file != null)
             CircleAvatar(radius: radiusValue, backgroundImage: FileImage(file!))
           else
-            _Placeholder(radius: radius),
+            _Placeholder(radius: radiusValue, iconSize: menoRadius.iconSize),
           resolvedBorder,
         ],
       );
@@ -107,11 +111,11 @@ class _CachedUrlImage extends StatelessWidget {
   const _CachedUrlImage({required this.url, required this.radius});
 
   final String? url;
-  final MenoAvatarRadius radius;
+  final double radius;
 
   @override
   Widget build(BuildContext context) {
-    final diameter = radius.value * 2;
+    final diameter = radius * 2;
     return CachedNetworkImage(
       imageUrl: url!,
       imageBuilder: (_, image) => CircleAvatar(foregroundImage: image),
@@ -124,21 +128,18 @@ class _CachedUrlImage extends StatelessWidget {
 }
 
 class _Placeholder extends StatelessWidget {
-  const _Placeholder({required this.radius});
+  const _Placeholder({required this.radius, required this.iconSize});
 
-  final MenoAvatarRadius radius;
+  final double radius;
+  final double iconSize;
 
   @override
   Widget build(BuildContext context) {
     final colors = MenoColorScheme.of(context);
     return CircleAvatar(
-      radius: radius.value,
+      radius: radius,
       backgroundColor: colors.componentSecondary,
-      child: Icon(
-        MIcons.user,
-        color: colors.labelPlaceholder,
-        size: radius.iconSize,
-      ),
+      child: Icon(MIcons.user, color: colors.labelPlaceholder, size: iconSize),
     );
   }
 }
@@ -146,7 +147,7 @@ class _Placeholder extends StatelessWidget {
 class _Skeleton extends StatelessWidget {
   const _Skeleton({required this.radius});
 
-  final MenoAvatarRadius radius;
+  final double radius;
 
   @override
   Widget build(BuildContext context) {
@@ -154,7 +155,7 @@ class _Skeleton extends StatelessWidget {
     return Skeletonizer(
       child: Skeleton.unite(
         child: CircleAvatar(
-          radius: radius.value,
+          radius: radius,
           backgroundColor: colors.backgroundDefault,
         ),
       ),

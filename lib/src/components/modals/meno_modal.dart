@@ -51,24 +51,30 @@ class MenoModal extends StatelessWidget {
         hasTitle ? const EdgeInsets.only(top: 48) : EdgeInsets.zero;
 
     return SafeArea(
-      child: Material(
-        color: colors.sectionPrimary,
-        child: Padding(
-          padding: padding ?? const EdgeInsets.fromLTRB(16, 0, 16, 16),
-          child: SizedBox(
-            width: double.infinity,
-            child: Stack(
-              children: [
-                if (hasTitle)
-                  Positioned.fill(
-                    child: MenoModalTitle(
-                      title!,
-                      showCloseButton: showCloseButton,
-                      showDivider: showDivider,
+      child: Padding(
+        padding: MediaQuery.viewInsetsOf(context),
+        child: Material(
+          color: colors.sectionPrimary,
+          child: Padding(
+            padding: padding ?? const EdgeInsets.fromLTRB(16, 0, 16, 16),
+            child: SizedBox(
+              width: double.infinity,
+              child: Stack(
+                children: [
+                  if (hasTitle)
+                    Positioned.fill(
+                      child: MenoModalTitle(
+                        title!,
+                        showCloseButton: showCloseButton,
+                        showDivider: showDivider,
+                      ),
                     ),
+                  Padding(
+                    padding: effectiveTopPadding,
+                    child: builder(context),
                   ),
-                Padding(padding: effectiveTopPadding, child: builder(context)),
-              ],
+                ],
+              ),
             ),
           ),
         ),
