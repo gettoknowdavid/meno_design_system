@@ -30,7 +30,7 @@ class MenoTextbox extends FormField<String> {
     this.required = false,
     this.textInputAction,
     this.size = MenoSize.md,
-    this.autofocus = true,
+    this.autofocus = false,
   }) : super(
          builder: (field) {
            void onChangedHandler(String value) {
@@ -132,7 +132,7 @@ class _Textbox extends HookWidget {
     this.required = false,
     this.textInputAction,
     this.size = MenoSize.md,
-    this.autofocus = true,
+    this.autofocus = false,
   });
 
   final String? label;
