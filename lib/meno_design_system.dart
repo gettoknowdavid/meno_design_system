@@ -5,6 +5,7 @@ export 'src/assets/assets.gen.dart';
 export 'src/assets/fonts.gen.dart';
 export 'src/components/avatars/avatars.dart';
 export 'src/components/buttons/buttons.dart';
+export 'src/components/dialogs/dialogs.dart';
 export 'src/components/indicators/indicators.dart';
 export 'src/components/inputs/inputs.dart';
 export 'src/components/list_tiles/list_tiles.dart';
