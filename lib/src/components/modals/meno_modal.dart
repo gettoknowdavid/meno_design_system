@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meno_design_system/meno_design_system.dart'
-    show MenoColorScheme, MenoModalTitle, MenoSpacer;
+    show MenoColorScheme, MenoModalTitle;
 
 /// A widget that displays a title bar for a modal.
 ///
