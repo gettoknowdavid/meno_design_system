@@ -56,10 +56,14 @@ class MenoButtonTheme extends ThemeExtension<MenoButtonTheme> {
         foregroundColor: Internal.resolveWith(
           colors.buttonLabelSecondary,
           pressed: colors.buttonLabelSecondary.withValues(alpha: 0.4),
+          disabled: colors.buttonLabelSecondary.withValues(alpha: 0.4),
         ),
         side: Internal.resolveWith(
           side.copyWith(color: colors.buttonFill),
           pressed: side.copyWith(
+            color: colors.buttonFill.withValues(alpha: 0.4),
+          ),
+          disabled: side.copyWith(
             color: colors.buttonFill.withValues(alpha: 0.4),
           ),
         ),

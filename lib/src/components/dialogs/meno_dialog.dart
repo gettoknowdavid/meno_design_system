@@ -43,8 +43,8 @@ class MenoDialog extends StatelessWidget {
     this.onPrimaryAction,
     this.secondaryActionText = 'Cancel',
     this.onSecondaryAction,
-    this.titleAlign = TextAlign.left,
     this.content,
+    this.isDanger = false,
     super.key,
   });
 
@@ -77,11 +77,11 @@ class MenoDialog extends StatelessWidget {
   /// Action triggered when the main action is pressed
   final VoidCallback? onSecondaryAction;
 
-  /// Alignment for the title
-  final TextAlign titleAlign;
-
   /// Content that appears beneath the description
   final Widget? content;
+
+  /// If the primary action should be a danger button
+  final bool isDanger;
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +101,10 @@ class MenoDialog extends StatelessWidget {
               : null,
       alignment: Alignment.center,
       iconPadding: const EdgeInsets.only(top: 24),
-      title: _MenoDialogTitle(title, align: titleAlign),
+      title: _MenoDialogTitle(
+        title,
+        align: icon != null ? TextAlign.center : TextAlign.left,
+      ),
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
@@ -126,13 +129,22 @@ class MenoDialog extends StatelessWidget {
             child: Text(secondaryActionText),
           ),
         ),
-        SizedBox(
-          height: 40,
-          child: MenoPrimaryButton(
-            onPressed: onPrimaryAction,
-            child: Text(primaryActionText),
+        if (isDanger)
+          SizedBox(
+            height: 40,
+            child: MenoDangerButton(
+              onPressed: onPrimaryAction,
+              child: Text(primaryActionText),
+            ),
+          )
+        else
+          SizedBox(
+            height: 40,
+            child: MenoPrimaryButton(
+              onPressed: onPrimaryAction,
+              child: Text(primaryActionText),
+            ),
           ),
-        ),
       ],
     );
   }

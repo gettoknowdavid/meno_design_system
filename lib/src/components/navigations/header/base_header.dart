@@ -125,7 +125,12 @@ abstract class BaseHeader extends StatelessWidget
               ),
               SizedBox(width: titleEndGap),
               if (actions?.isNotEmpty ?? false)
-                Row(spacing: actionsSpacing ?? 0, children: actions!),
+                Row(
+                  spacing: actionsSpacing ?? 0,
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: actions!,
+                ),
               if (actionLabel != null)
                 SizedBox(
                   width: 41,

@@ -22,6 +22,7 @@ class MenoAvatar extends HookWidget {
     this.hasBorder = false,
     this.isLoading = false,
     this.borderColor,
+    this.enabled = true,
   });
 
   /// The radius of the avatar.
@@ -61,6 +62,9 @@ class MenoAvatar extends HookWidget {
   /// Flag for when the image is being loaded from the url
   final bool isLoading;
 
+  /// Whether the image is enabled or not.
+  final bool enabled;
+
   @override
   Widget build(BuildContext context) {
     final colors = MenoColorScheme.of(context);
@@ -86,11 +90,15 @@ class MenoAvatar extends HookWidget {
       return Stack(
         children: [
           if (!isLoading && file == null && url != null)
-            _CachedUrlImage(url: url, radius: radiusValue)
+            _CachedUrlImage(url: url, radius: radiusValue, enabled: enabled)
           else if (!isLoading && file != null)
             CircleAvatar(radius: radiusValue, backgroundImage: FileImage(file!))
           else
-            _Placeholder(radius: radiusValue, iconSize: menoRadius.iconSize),
+            _Placeholder(
+              radius: radiusValue,
+              menoRadius: menoRadius,
+              enabled: enabled,
+            ),
           resolvedBorder,
         ],
       );
@@ -108,38 +116,61 @@ class MenoAvatar extends HookWidget {
 }
 
 class _CachedUrlImage extends StatelessWidget {
-  const _CachedUrlImage({required this.url, required this.radius});
+  const _CachedUrlImage({
+    required this.url,
+    required this.radius,
+    this.enabled = true,
+  });
 
   final String? url;
   final double radius;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
     final diameter = radius * 2;
-    return CachedNetworkImage(
-      imageUrl: url!,
-      imageBuilder: (_, image) => CircleAvatar(foregroundImage: image),
-      progressIndicatorBuilder: (context, url, _) => _Skeleton(radius: radius),
-      height: diameter,
-      width: diameter,
-      fit: BoxFit.cover,
+    return Opacity(
+      opacity: enabled ? 1.0 : 0.6,
+      child: CachedNetworkImage(
+        imageUrl: url!,
+        imageBuilder: (_, image) => CircleAvatar(foregroundImage: image),
+        progressIndicatorBuilder: (__, url, _) => _Skeleton(radius: radius),
+        height: diameter,
+        width: diameter,
+        fit: BoxFit.cover,
+      ),
     );
   }
 }
 
 class _Placeholder extends StatelessWidget {
-  const _Placeholder({required this.radius, required this.iconSize});
+  const _Placeholder({
+    this.menoRadius = MenoAvatarRadius.xxlg,
+    this.radius,
+    this.enabled = true,
+  });
 
-  final double radius;
-  final double iconSize;
+  final MenoAvatarRadius menoRadius;
+  final double? radius;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
     final colors = MenoColorScheme.of(context);
-    return CircleAvatar(
-      radius: radius,
-      backgroundColor: colors.componentSecondary,
-      child: Icon(MIcons.user, color: colors.labelPlaceholder, size: iconSize),
+    final iconSize = radius != null ? radius! * 0.7 : menoRadius.iconSize;
+    return Opacity(
+      opacity: enabled ? 1.0 : 0.6,
+      child: Skeleton.unite(
+        child: CircleAvatar(
+          radius: radius ?? menoRadius.value,
+          backgroundColor: colors.componentSecondary,
+          child: Icon(
+            MIcons.user,
+            color: colors.labelPlaceholder,
+            size: iconSize,
+          ),
+        ),
+      ),
     );
   }
 }
