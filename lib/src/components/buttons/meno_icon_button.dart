@@ -20,7 +20,22 @@ class MenoIconButton extends StatelessWidget {
     this.color,
     this.fixedSize,
     this.semanticLabel,
-  });
+  }) : _filled = false,
+       _fillColor = null;
+
+  /// Creates an instance of [MenoIconButton] with a filled style.
+  const MenoIconButton.filled(
+    this.icon, {
+    required this.onPressed,
+    super.key,
+    this.iconSize,
+    this.padding,
+    this.color,
+    this.fixedSize,
+    this.semanticLabel,
+    Color? fillColor,
+  }) : _filled = true,
+       _fillColor = fillColor;
 
   /// The icon widget to be displayed inside the button.
   final IconData icon;
@@ -44,22 +59,38 @@ class MenoIconButton extends StatelessWidget {
   /// Semantic label
   final String? semanticLabel;
 
+  /// Whether the button is filled not.
+  final bool _filled;
+
+  final Color? _fillColor;
+
   @override
   Widget build(BuildContext context) {
+    final iconWidget = Icon(icon);
+    final style = ButtonStyle(
+      padding: Internal.all(padding ?? EdgeInsets.zero),
+      iconColor: Internal.all(color),
+      iconSize: Internal.all(iconSize),
+      backgroundColor: _filled ? Internal.all(_fillColor) : null,
+    );
+
     return SizedBox.fromSize(
       size: fixedSize ?? const Size.square(24),
       child: Semantics(
         label: semanticLabel,
         button: true,
-        child: IconButton(
-          onPressed: onPressed,
-          icon: Icon(icon),
-          style: ButtonStyle(
-            padding: Internal.all(padding ?? EdgeInsets.zero),
-            iconColor: Internal.all(color),
-            iconSize: Internal.all(iconSize),
-          ),
-        ),
+        child:
+            _filled
+                ? IconButton.filled(
+                  onPressed: onPressed,
+                  icon: iconWidget,
+                  style: style,
+                )
+                : IconButton(
+                  onPressed: onPressed,
+                  icon: iconWidget,
+                  style: style,
+                ),
       ),
     );
   }

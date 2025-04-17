@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meno_design_system/meno_design_system.dart'
-    show MenoColorScheme, MenoModalTitle;
+    show MenoColorScheme, MenoModalTitle, MenoSpacer;
 
 /// A widget that displays a title bar for a modal.
 ///
@@ -47,34 +47,34 @@ class MenoModal extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = MenoColorScheme.of(context);
     final hasTitle = title != null;
-    final effectiveTopPadding =
-        hasTitle ? const EdgeInsets.only(top: 48) : EdgeInsets.zero;
 
     return SafeArea(
       child: Padding(
         padding: MediaQuery.viewInsetsOf(context),
         child: Material(
           color: colors.sectionPrimary,
-          child: Padding(
-            padding: padding ?? const EdgeInsets.fromLTRB(16, 0, 16, 16),
-            child: SizedBox(
-              width: double.infinity,
-              child: Stack(
-                children: [
-                  if (hasTitle)
-                    Positioned.fill(
-                      child: MenoModalTitle(
-                        title!,
-                        showCloseButton: showCloseButton,
-                        showDivider: showDivider,
-                      ),
+          child: SizedBox(
+            width: double.infinity,
+            child: Stack(
+              children: [
+                if (hasTitle)
+                  Positioned.fill(
+                    child: MenoModalTitle(
+                      title!,
+                      showCloseButton: showCloseButton,
+                      showDivider: showDivider,
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
                     ),
-                  Padding(
-                    padding: effectiveTopPadding,
+                  ),
+                Padding(
+                  padding: EdgeInsets.only(top: hasTitle ? 48 : 0),
+                  child: Padding(
+                    padding:
+                        padding ?? const EdgeInsets.fromLTRB(16, 0, 16, 16),
                     child: builder(context),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

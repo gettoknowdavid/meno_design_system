@@ -82,6 +82,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
     final colors = MenoColorScheme.$default(brightness);
     final snackbar = MenoSnackbarTheme.$default(colors);
     final themeExtension = MenoTheme.$default(brightness);
+    final textTheme = MenoTextTheme.$default(colors);
     final navigationBarTheme = MenoNavigationBarTheme.$default(colors);
 
     return ThemeData(
@@ -130,6 +131,31 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
         circularTrackColor: colors.brandPrimaryLighter,
         linearMinHeight: 4,
         linearTrackColor: colors.brandPrimaryLighter,
+      ),
+      searchBarTheme: SearchBarThemeData(
+        constraints: BoxConstraints.tight(const Size.fromHeight(40)),
+        padding: Internal.all(
+          const EdgeInsets.symmetric(horizontal: Insets.md),
+        ),
+        hintStyle: Internal.all(
+          textTheme.captionRegular.copyWith(color: colors.labelPlaceholder),
+        ),
+        shape: Internal.all(
+          const RoundedRectangleBorder(borderRadius: MenoBorderRadius.sm),
+        ),
+        side: WidgetStateProperty.resolveWith((states) {
+          final side = BorderSide(color: colors.strokeSoft);
+          if (states.contains(WidgetState.error)) {
+            return side.copyWith(color: colors.errorBase);
+          } else if (states.contains(WidgetState.disabled)) {
+            return side.copyWith(color: colors.disabledLight);
+          } else if (states.contains(WidgetState.focused)) {
+            return side.copyWith(color: colors.brandPrimary);
+          } else if (states.contains(WidgetState.selected)) {
+            return side.copyWith(color: colors.brandPrimary);
+          }
+          return side;
+        }),
       ),
       snackBarTheme: SnackBarThemeData(
         actionBackgroundColor: Colors.transparent,

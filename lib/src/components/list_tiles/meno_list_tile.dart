@@ -27,6 +27,7 @@ class MenoListTile extends _BaseListTile {
     super.enabled,
     super.isThreeLine,
     super.selected,
+    super.horizontalTitleGap,
   }) : super(size: MenoSize.md);
 
   /// Internal named constructor used by factory constructors to override
@@ -145,6 +146,7 @@ class _BaseListTile extends StatelessWidget {
     this.contentPadding = const EdgeInsets.fromLTRB(16, 12, 24, 12),
     this.isThreeLine = false,
     this.size = MenoSize.md,
+    this.horizontalTitleGap = 16,
   });
 
   /// Primary text displayed in the tile.
@@ -186,14 +188,18 @@ class _BaseListTile extends StatelessWidget {
   /// Visual size of the tile (small, medium, large).
   final MenoSize size;
 
+  /// The horizontal gap between the titles and the leading/trailing widgets
+  final double horizontalTitleGap;
+
   @override
   Widget build(BuildContext context) {
     final colors = MenoColorScheme.of(context);
 
     return ListTile(
+      minTileHeight: 48,
       contentPadding: contentPadding,
-      horizontalTitleGap: 16,
-      minVerticalPadding: Insets.sm,
+      horizontalTitleGap: horizontalTitleGap,
+      minVerticalPadding: Insets.xs,
       leading: leading,
       iconColor: iconColor ?? colors.brandPrimary,
       textColor: headlineColor,
@@ -244,8 +250,17 @@ class _Title extends StatelessWidget {
   Widget build(BuildContext context) {
     return switch (size) {
       MenoSize.lg => _LargeTitle(headline, overline: overline!),
-      MenoSize.md => MenoText.body(headline, weight: MenoFontWeight.regular),
-      _ => MenoText.body(headline),
+      MenoSize.md => MenoText.body(
+        headline,
+        weight: MenoFontWeight.regular,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      ),
+      _ => MenoText.body(
+        headline,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      ),
     };
   }
 }
@@ -266,8 +281,18 @@ class _LargeTitle extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        MenoText.micro(overline, color: colors.labelHelp),
-        MenoText.body(headline, weight: MenoFontWeight.regular),
+        MenoText.micro(
+          overline,
+          color: colors.labelHelp,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        MenoText.body(
+          headline,
+          weight: MenoFontWeight.regular,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
       ],
     );
   }

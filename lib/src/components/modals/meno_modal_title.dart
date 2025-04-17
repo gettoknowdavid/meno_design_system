@@ -48,25 +48,32 @@ class MenoModalTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = MenoColorScheme.of(context);
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            MenoText.subheading(title),
-            if (showCloseButton)
-              MenoIconButton(
-                MIcons.x_close,
-                onPressed: () => Navigator.pop(context),
-                color: colors.labelPlaceholder,
-                semanticLabel: 'Close modal button',
+    return Padding(
+      padding: padding ?? EdgeInsets.zero,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              MenoText.subheading(
+                title,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
-          ],
-        ),
-        if (showDivider) ...[const MenoSpacer.v(Insets.sm), const Divider()],
-      ],
+              if (showCloseButton)
+                MenoIconButton(
+                  MIcons.x_close,
+                  onPressed: () => Navigator.pop(context),
+                  color: colors.labelPlaceholder,
+                  semanticLabel: 'Close modal button',
+                ),
+            ],
+          ),
+          if (showDivider) ...[const MenoSpacer.v(Insets.sm), const Divider()],
+        ],
+      ),
     );
   }
 }

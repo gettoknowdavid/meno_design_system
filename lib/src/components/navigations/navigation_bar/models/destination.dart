@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 /// {@template destination}
 /// Destination
 /// {@endtemplate}
-class Destination {
+@immutable
+final class Destination {
   /// {@macro destination}
   const Destination({required this.icon, required this.label});
 
