@@ -86,6 +86,7 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
     final navigationBarTheme = MenoNavigationBarTheme.$default(colors);
 
     return ThemeData(
+      appBarTheme: const AppBarTheme(elevation: 0, scrolledUnderElevation: 0),
       bottomSheetTheme: BottomSheetThemeData(
         backgroundColor: colors.sectionPrimary,
         dragHandleColor: colors.labelPlaceholder,
@@ -146,15 +147,29 @@ class MenoTheme extends ThemeExtension<MenoTheme> {
         side: WidgetStateProperty.resolveWith((states) {
           final side = BorderSide(color: colors.strokeSoft);
           if (states.contains(WidgetState.error)) {
-            return side.copyWith(color: colors.errorBase);
+            return side.copyWith(color: colors.errorBase, width: 2);
           } else if (states.contains(WidgetState.disabled)) {
             return side.copyWith(color: colors.disabledLight);
           } else if (states.contains(WidgetState.focused)) {
-            return side.copyWith(color: colors.brandPrimary);
+            return side.copyWith(color: colors.brandPrimary, width: 2);
           } else if (states.contains(WidgetState.selected)) {
-            return side.copyWith(color: colors.brandPrimary);
+            return side.copyWith(color: colors.brandPrimary, width: 2);
           }
           return side;
+        }),
+        textStyle: WidgetStateTextStyle.resolveWith((states) {
+          final baseTextStyle = textTheme.captionRegular;
+          late Color color;
+          if (states.contains(WidgetState.disabled)) {
+            color = colors.labelDisabled;
+          } else if (states.contains(WidgetState.focused)) {
+            color = colors.labelPrimary;
+          } else if (states.contains(WidgetState.error)) {
+            color = colors.labelPrimary;
+          } else {
+            color = colors.labelPlaceholder;
+          }
+          return baseTextStyle.copyWith(color: color);
         }),
       ),
       snackBarTheme: SnackBarThemeData(
