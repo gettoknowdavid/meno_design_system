@@ -1,3 +1,6 @@
+// 
+// ignore_for_file: require_trailing_commas
+
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -80,36 +83,38 @@ class MenoAvatar extends HookWidget {
           ),
         ),
       );
-    });
+    }, [hasBorder, borderColor, colors]);
 
     final radiusValue = radius ?? menoRadius.value;
     final diameter = radiusValue * 2;
 
     final child = useMemoized(() {
       if (isLoading) return _Skeleton(radius: radiusValue);
-      return Stack(
-        children: [
-          if (!isLoading && file == null && url != null)
-            _CachedUrlImage(url: url, radius: radiusValue, enabled: enabled)
-          else if (!isLoading && file != null)
-            CircleAvatar(radius: radiusValue, backgroundImage: FileImage(file!))
-          else
-            _Placeholder(
-              radius: radiusValue,
-              menoRadius: menoRadius,
-              enabled: enabled,
-            ),
-          resolvedBorder,
-        ],
+
+      if (!isLoading && file == null && url != null) {
+        return _CachedUrlImage(url: url, radius: radiusValue, enabled: enabled);
+      }
+
+      if (!isLoading && file != null) {
+        return CircleAvatar(
+          radius: radiusValue,
+          foregroundImage: FileImage(file!),
+        );
+      }
+
+      return _Placeholder(
+        radius: radiusValue,
+        menoRadius: menoRadius,
+        enabled: enabled,
       );
-    });
+    }, [isLoading, file, url, enabled, radiusValue, menoRadius, colors]);
 
     return SizedBox.square(
       dimension: diameter,
       child: InkWell(
-        onTap: onTap,
+        onTap: enabled ? onTap : null,
         borderRadius: MenoBorderRadius.circle,
-        child: child,
+        child: Stack(children: [child, resolvedBorder]),
       ),
     );
   }

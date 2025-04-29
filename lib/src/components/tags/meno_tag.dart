@@ -12,6 +12,9 @@ class MenoTag extends BaseTag {
     super.size,
     super.status,
     super.style,
+    super.borderRadius,
+    super.extraText,
+    super.showAnimation,
   });
 
   /// In Progress
@@ -31,12 +34,31 @@ class MenoTag extends BaseTag {
   }) = _ApprovedTag;
 
   /// Live
-  const factory MenoTag.live(
-    String label, {
+  const factory MenoTag.live({
     Key? key,
     MenoSize size,
     MenoTagStyle style,
+    String? extraText,
+    bool showAnimation,
   }) = _LiveTag;
+
+  /// Off-Air
+  const factory MenoTag.offAir({
+    Key? key,
+    MenoSize size,
+    MenoTagStyle style,
+    String? extraText,
+    bool showAnimation,
+  }) = _OffAirTag;
+
+  /// Waiting
+  const factory MenoTag.waiting({
+    Key? key,
+    MenoSize size,
+    MenoTagStyle style,
+    String? extraText,
+    bool showAnimation,
+  }) = _WaitingTag;
 
   /// Pending
   const factory MenoTag.pending(
@@ -74,12 +96,45 @@ class _ApprovedTag extends MenoTag {
 }
 
 class _LiveTag extends MenoTag {
-  const _LiveTag(
-    super.label, {
+  const _LiveTag({
     super.key,
     super.size = MenoSize.lg,
     super.style = MenoTagStyle.filled,
-  }) : super._(status: MenoTagStatus.live);
+    super.extraText,
+    super.showAnimation,
+  }) : super._(
+         'LIVE',
+         status: MenoTagStatus.live,
+         borderRadius: MenoBorderRadius.circle,
+       );
+}
+
+class _OffAirTag extends MenoTag {
+  const _OffAirTag({
+    super.key,
+    super.size = MenoSize.lg,
+    super.style = MenoTagStyle.filled,
+    super.extraText,
+    super.showAnimation,
+  }) : super._(
+         'OFF AIR',
+         status: MenoTagStatus.offAir,
+         borderRadius: MenoBorderRadius.circle,
+       );
+}
+
+class _WaitingTag extends MenoTag {
+  const _WaitingTag({
+    super.key,
+    super.size = MenoSize.lg,
+    super.style = MenoTagStyle.filled,
+    super.extraText,
+    super.showAnimation,
+  }) : super._(
+         'WAITING',
+         status: MenoTagStatus.waiting,
+         borderRadius: MenoBorderRadius.circle,
+       );
 }
 
 class _PendingTag extends MenoTag {

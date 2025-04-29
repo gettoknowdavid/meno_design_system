@@ -21,6 +21,8 @@ abstract class BaseTabBar extends HookWidget {
     this.type = MenoTabType.contained,
     this.isScrollable = true,
     this.height = 32.0,
+    this.onTap,
+    this.padding = const EdgeInsets.symmetric(horizontal: 16),
     super.key,
   });
 
@@ -40,6 +42,14 @@ abstract class BaseTabBar extends HookWidget {
 
   /// The height of each tab in the tab bar.
   final double height;
+
+  /// An optional callback that's called when the [TabBar] is tapped.
+  ///
+  /// The callback is applied to the index of the tab where the tap occurred.
+  final void Function(int)? onTap;
+
+  /// Padding
+  final EdgeInsetsGeometry? padding;
 
   /// Builds the widget for the tab bar.
   ///
@@ -82,7 +92,8 @@ abstract class BaseTabBar extends HookWidget {
     return TabBar(
       tabs: renderedTabs,
       controller: controller,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      onTap: onTap,
+      padding: padding,
       isScrollable: isScrollable,
       dividerColor: styles.dividerColor,
       dividerHeight: styles.dividerHeight,
@@ -91,7 +102,7 @@ abstract class BaseTabBar extends HookWidget {
       indicatorWeight: 0,
       splashFactory: NoSplash.splashFactory,
       // unselectedLabelColor: colors.labelHelp,
-      tabAlignment: TabAlignment.start,
+      tabAlignment: !isScrollable ? TabAlignment.fill : TabAlignment.start,
       labelPadding: EdgeInsets.zero,
       indicator: styles.indicator,
     );
@@ -153,7 +164,8 @@ class _TabChild extends StatelessWidget {
       curve: Curves.easeInOut,
       height: height,
       margin: margin,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      // padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       decoration: BoxDecoration(
         color: selected ? selectedbackgroundColor : unselectedbackgroundColor,
         borderRadius: isNormal ? null : MenoBorderRadius.circle,

@@ -13,6 +13,12 @@ enum MenoTagStatus {
   /// live
   live,
 
+  /// off-air
+  offAir,
+
+  /// waiting
+  waiting,
+
   /// pending
   pending,
 
@@ -40,6 +46,9 @@ class BaseTag extends StatefulWidget {
     this.size = MenoSize.md,
     this.status = MenoTagStatus.inProgress,
     this.style = MenoTagStyle.filled,
+    this.borderRadius = MenoBorderRadius.xs,
+    this.extraText,
+    this.showAnimation = false,
   });
 
   /// Label
@@ -53,6 +62,18 @@ class BaseTag extends StatefulWidget {
 
   /// [MenoTagStyle]
   final MenoTagStyle style;
+
+  /// Border radius
+  final BorderRadiusGeometry? borderRadius;
+
+  /// Some extra text to be displayed like the number of people streaming a
+  /// live broadcast
+  final String? extraText;
+
+  /// Whether to show the broadcast animation
+  ///
+  /// Defaults to false.
+  final bool showAnimation;
 
   @override
   State<BaseTag> createState() => _BaseTagState();
@@ -81,9 +102,21 @@ class _BaseTagState extends State<BaseTag> {
           border: Border.all(
             color: isFilled ? backgroundColor : foregroundColor,
           ),
-          borderRadius: MenoBorderRadius.xs,
+          borderRadius: widget.borderRadius,
         ),
-        child: Text(widget.label, style: textStyle),
+        child: Row(
+          children: [
+            if (widget.showAnimation) ...[
+              const MenoLoadingIndicator.xs(isBox: true),
+              const MenoSpacer.h(Insets.xs),
+            ],
+            Text(widget.label, style: textStyle),
+            if (widget.extraText != null) ...[
+              const MenoSpacer.h(Insets.xs),
+              Text(widget.extraText!, style: textStyle),
+            ],
+          ],
+        ),
       ),
     );
   }
@@ -91,7 +124,7 @@ class _BaseTagState extends State<BaseTag> {
   double get _height => switch (widget.size) {
     MenoSize.lg => 24.0,
     MenoSize.md => 20.0,
-    _ => 16.0,
+    _ => 18.0,
   };
 
   EdgeInsetsGeometry get _padding => switch (widget.size) {
@@ -102,14 +135,18 @@ class _BaseTagState extends State<BaseTag> {
 
   TextStyle get _textStyle => switch (widget.size) {
     MenoSize.lg => MenoTextStyles.captionMedium,
-    _ => MenoTextStyles.microMedium,
+    MenoSize.md => MenoTextStyles.microMedium,
+    MenoSize.sm => MenoTextStyles.microMedium,
+    _ => MenoTextStyles.nanoMedium,
   };
 
   Color _backgroundColor(MenoColorScheme colors) => switch (widget.status) {
     MenoTagStatus.approved => colors.successLighter,
     MenoTagStatus.disabled => colors.disabledLighter,
     MenoTagStatus.inProgress => colors.verifiedLighter,
-    MenoTagStatus.live => colors.errorLighter,
+    MenoTagStatus.live => colors.errorBase,
+    MenoTagStatus.offAir => colors.componentPrimary,
+    MenoTagStatus.waiting => colors.componentPrimary,
     MenoTagStatus.pending => colors.pendingLighter,
   };
 
@@ -117,7 +154,9 @@ class _BaseTagState extends State<BaseTag> {
     MenoTagStatus.approved => colors.successBase,
     MenoTagStatus.disabled => colors.disabledBase,
     MenoTagStatus.inProgress => colors.verifiedBase,
-    MenoTagStatus.live => colors.errorBase,
+    MenoTagStatus.live => colors.errorLighter,
+    MenoTagStatus.offAir => colors.labelHelp,
+    MenoTagStatus.waiting => colors.labelHelp,
     MenoTagStatus.pending => colors.pendingBase,
   };
 }

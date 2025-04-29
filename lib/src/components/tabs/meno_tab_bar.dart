@@ -13,6 +13,8 @@ class MenoTabBar extends BaseTabBar {
     super.isScrollable = true,
     super.key,
     super.type = MenoTabType.contained,
+    super.padding,
+    super.onTap,
   });
 
   /// Creates a [MenoTabBar] with the normal tab style.
@@ -24,6 +26,8 @@ class MenoTabBar extends BaseTabBar {
     required TabController controller,
     Key? key,
     bool isScrollable,
+    void Function(int)? onTap,
+    EdgeInsetsGeometry? padding,
   }) = _NormalMenoTabBar;
 
   /// Creates a [MenoTabBar] with the contained tab style.
@@ -35,6 +39,8 @@ class MenoTabBar extends BaseTabBar {
     required TabController controller,
     Key? key,
     bool isScrollable,
+    void Function(int)? onTap,
+    EdgeInsetsGeometry? padding,
   }) = _ContainedMenoTabBar;
 }
 
@@ -46,6 +52,8 @@ class _NormalMenoTabBar extends MenoTabBar {
     required super.controller,
     super.key,
     super.isScrollable = true,
+    super.onTap,
+    super.padding,
   }) : super._(type: MenoTabType.normal);
 }
 
@@ -57,5 +65,7 @@ class _ContainedMenoTabBar extends MenoTabBar {
     required super.controller,
     super.key,
     super.isScrollable = true,
+    super.onTap,
+    super.padding,
   }) : super._(type: MenoTabType.contained);
 }

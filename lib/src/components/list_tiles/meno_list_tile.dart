@@ -28,6 +28,7 @@ class MenoListTile extends _BaseListTile {
     super.isThreeLine,
     super.selected,
     super.horizontalTitleGap,
+    super.minTileHeight,
   }) : super(size: MenoSize.md);
 
   /// Internal named constructor used by factory constructors to override
@@ -47,6 +48,7 @@ class MenoListTile extends _BaseListTile {
     super.enabled,
     super.isThreeLine,
     super.selected,
+    super.minTileHeight,
   });
 
   /// {@template meno_list_tile.small}
@@ -64,6 +66,7 @@ class MenoListTile extends _BaseListTile {
     VoidCallback? onTap,
     bool enabled,
     bool selected,
+    EdgeInsetsGeometry? contentPadding,
   }) = _SmallListTile;
 
   /// {@template meno_list_tile.large}
@@ -100,10 +103,8 @@ class _SmallListTile extends MenoListTile {
     super.onTap,
     super.enabled = true,
     super.selected = false,
-  }) : super._(
-         size: MenoSize.sm,
-         contentPadding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-       );
+    super.contentPadding = const EdgeInsets.fromLTRB(16, 8, 16, 8),
+  }) : super._(size: MenoSize.sm, minTileHeight: 40);
 }
 
 /// Internal implementation of [MenoListTile.large].
@@ -147,6 +148,7 @@ class _BaseListTile extends StatelessWidget {
     this.isThreeLine = false,
     this.size = MenoSize.md,
     this.horizontalTitleGap = 16,
+    this.minTileHeight = 40,
   });
 
   /// Primary text displayed in the tile.
@@ -180,7 +182,7 @@ class _BaseListTile extends StatelessWidget {
   final VoidCallback? onTap;
 
   /// Controls the internal padding of the tile.
-  final EdgeInsetsGeometry contentPadding;
+  final EdgeInsetsGeometry? contentPadding;
 
   /// Enables three-line layout (overline + headline + subtitle).
   final bool isThreeLine;
@@ -191,12 +193,14 @@ class _BaseListTile extends StatelessWidget {
   /// The horizontal gap between the titles and the leading/trailing widgets
   final double horizontalTitleGap;
 
+  final double minTileHeight;
+
   @override
   Widget build(BuildContext context) {
     final colors = MenoColorScheme.of(context);
 
     return ListTile(
-      minTileHeight: 48,
+      minTileHeight: minTileHeight,
       contentPadding: contentPadding,
       horizontalTitleGap: horizontalTitleGap,
       minVerticalPadding: Insets.xs,

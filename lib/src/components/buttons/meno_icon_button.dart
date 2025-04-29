@@ -20,6 +20,7 @@ class MenoIconButton extends StatelessWidget {
     this.color,
     this.fixedSize,
     this.semanticLabel,
+    this.shape,
   }) : _filled = false,
        _fillColor = null;
 
@@ -33,6 +34,7 @@ class MenoIconButton extends StatelessWidget {
     this.color,
     this.fixedSize,
     this.semanticLabel,
+    this.shape,
     Color? fillColor,
   }) : _filled = true,
        _fillColor = fillColor;
@@ -62,6 +64,9 @@ class MenoIconButton extends StatelessWidget {
   /// Whether the button is filled not.
   final bool _filled;
 
+  /// Custom shape of the button
+  final OutlinedBorder? shape;
+
   final Color? _fillColor;
 
   @override
@@ -72,6 +77,7 @@ class MenoIconButton extends StatelessWidget {
       iconColor: Internal.all(color),
       iconSize: Internal.all(iconSize),
       backgroundColor: _filled ? Internal.all(_fillColor) : null,
+      shape: shape == null ? null : Internal.all(shape),
     );
 
     return SizedBox.fromSize(

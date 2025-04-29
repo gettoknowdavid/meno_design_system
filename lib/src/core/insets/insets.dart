@@ -17,8 +17,8 @@ class Insets {
   /// Large inset of 16.0
   static const lg = 16.0;
 
-  /// Extra Large inset of 20.0
-  static const xlg = 20.0;
+  /// Extra Large inset of 24.0
+  static const xlg = 24.0;
 
   /// Extra extra Large inset of 32.0
   static const xxlg = 32.0;
