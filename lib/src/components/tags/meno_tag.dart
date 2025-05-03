@@ -51,6 +51,15 @@ class MenoTag extends BaseTag {
     bool showAnimation,
   }) = _OffAirTag;
 
+  /// Reconnecting
+  const factory MenoTag.reconnecting({
+    Key? key,
+    MenoSize size,
+    MenoTagStyle style,
+    String? extraText,
+    bool showAnimation,
+  }) = _Reconnecting;
+
   /// Waiting
   const factory MenoTag.waiting({
     Key? key,
@@ -83,7 +92,10 @@ class _InProgressTag extends MenoTag {
     super.key,
     super.size = MenoSize.lg,
     super.style = MenoTagStyle.filled,
-  }) : super._(status: MenoTagStatus.inProgress);
+  }) : super._(
+         status: MenoTagStatus.inProgress,
+         borderRadius: MenoBorderRadius.circle,
+       );
 }
 
 class _ApprovedTag extends MenoTag {
@@ -104,7 +116,21 @@ class _LiveTag extends MenoTag {
     super.showAnimation,
   }) : super._(
          'LIVE',
-         status: MenoTagStatus.live,
+         status: MenoTagStatus.reconnecting,
+         borderRadius: MenoBorderRadius.circle,
+       );
+}
+
+class _Reconnecting extends MenoTag {
+  const _Reconnecting({
+    super.key,
+    super.size = MenoSize.lg,
+    super.style = MenoTagStyle.filled,
+    super.extraText,
+    super.showAnimation,
+  }) : super._(
+         'RECONNECTING',
+         status: MenoTagStatus.offAir,
          borderRadius: MenoBorderRadius.circle,
        );
 }
@@ -143,7 +169,10 @@ class _PendingTag extends MenoTag {
     super.key,
     super.size = MenoSize.lg,
     super.style = MenoTagStyle.filled,
-  }) : super._(status: MenoTagStatus.pending);
+  }) : super._(
+         status: MenoTagStatus.pending,
+         borderRadius: MenoBorderRadius.circle,
+       );
 }
 
 class _DisabledTag extends MenoTag {

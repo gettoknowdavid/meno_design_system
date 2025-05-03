@@ -13,6 +13,9 @@ enum MenoTagStatus {
   /// live
   live,
 
+  /// reconnecting
+  reconnecting,
+
   /// off-air
   offAir,
 
@@ -98,11 +101,12 @@ class _BaseTagState extends State<BaseTag> {
         height: height,
         padding: padding,
         decoration: BoxDecoration(
+          borderRadius: widget.borderRadius,
           color: isFilled ? backgroundColor : null,
           border: Border.all(
+            width: 1.5,
             color: isFilled ? backgroundColor : foregroundColor,
           ),
-          borderRadius: widget.borderRadius,
         ),
         child: Row(
           children: [
@@ -145,6 +149,7 @@ class _BaseTagState extends State<BaseTag> {
     MenoTagStatus.disabled => colors.disabledLighter,
     MenoTagStatus.inProgress => colors.verifiedLighter,
     MenoTagStatus.live => colors.errorBase,
+    MenoTagStatus.reconnecting => colors.errorLight,
     MenoTagStatus.offAir => colors.componentPrimary,
     MenoTagStatus.waiting => colors.componentPrimary,
     MenoTagStatus.pending => colors.pendingLighter,
@@ -155,6 +160,7 @@ class _BaseTagState extends State<BaseTag> {
     MenoTagStatus.disabled => colors.disabledBase,
     MenoTagStatus.inProgress => colors.verifiedBase,
     MenoTagStatus.live => colors.errorLighter,
+    MenoTagStatus.reconnecting => colors.errorDark,
     MenoTagStatus.offAir => colors.labelHelp,
     MenoTagStatus.waiting => colors.labelHelp,
     MenoTagStatus.pending => colors.pendingBase,
