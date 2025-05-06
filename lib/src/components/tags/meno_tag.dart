@@ -116,7 +116,7 @@ class _LiveTag extends MenoTag {
     super.showAnimation,
   }) : super._(
          'LIVE',
-         status: MenoTagStatus.reconnecting,
+         status: MenoTagStatus.live,
          borderRadius: MenoBorderRadius.circle,
        );
 }
@@ -130,7 +130,7 @@ class _Reconnecting extends MenoTag {
     super.showAnimation,
   }) : super._(
          'RECONNECTING',
-         status: MenoTagStatus.offAir,
+         status: MenoTagStatus.reconnecting,
          borderRadius: MenoBorderRadius.circle,
        );
 }
