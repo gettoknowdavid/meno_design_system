@@ -13,8 +13,8 @@ import 'package:meno_design_system/meno_design_system.dart';
 class MenoTextbox extends FormField<String> {
   /// {@macro meno_textbox}
   MenoTextbox({
-    required this.label,
     super.key,
+    this.label,
     this.labelIcon,
     super.initialValue,
     super.autovalidateMode = AutovalidateMode.onUserInteraction,
@@ -31,6 +31,10 @@ class MenoTextbox extends FormField<String> {
     this.textInputAction,
     this.size = MenoSize.md,
     this.autofocus = false,
+    this.maxLines,
+    this.minLines,
+    this.showCounter = true,
+    this.contentPadding = const EdgeInsets.all(Insets.md),
   }) : super(
          builder: (field) {
            void onChangedHandler(String value) {
@@ -59,12 +63,16 @@ class MenoTextbox extends FormField<String> {
              errorText: field.errorText,
              hasError: field.hasError || !field.isValid,
              isEmpty: field.value?.isEmpty ?? false,
+             maxLines: maxLines,
+             minLines: minLines,
+             showCounter: showCounter,
+             contentPadding: contentPadding,
            );
          },
        );
 
   /// The label for the text area.
-  final String label;
+  final String? label;
 
   /// An optional icon to display with the label.
   final IconData? labelIcon;
@@ -102,6 +110,18 @@ class MenoTextbox extends FormField<String> {
   /// Autofocus
   final bool autofocus;
 
+  /// Max lines
+  final int? maxLines;
+
+  /// Min lines
+  final int? minLines;
+
+  /// Whether to show counter
+  final bool showCounter;
+
+  /// Content Padding
+  final EdgeInsetsGeometry contentPadding;
+
   @override
   _MenoTextboxState createState() => _MenoTextboxState();
 }
@@ -133,6 +153,10 @@ class _Textbox extends HookWidget {
     this.textInputAction,
     this.size = MenoSize.md,
     this.autofocus = false,
+    this.maxLines = 5,
+    this.minLines = 1,
+    this.showCounter = true,
+    this.contentPadding = const EdgeInsets.all(Insets.md),
   });
 
   final String? label;
@@ -154,12 +178,17 @@ class _Textbox extends HookWidget {
   final bool hasError;
   final bool isEmpty;
   final String? errorText;
+  final int? maxLines;
+  final int? minLines;
+  final bool showCounter;
+  final EdgeInsetsGeometry contentPadding;
 
   @override
   Widget build(BuildContext context) {
     final theme = MenoInputTheme.of(context);
     final border = useMemoized(() => _border(context, size), [context, size]);
-    final maxLines = useMemoized(() => _maxLines(size), [size]);
+    final effectiveMaxLines =
+        maxLines ?? useMemoized(() => _maxLines(size), [size]);
 
     final focus = focusNode ?? useMemoized(FocusNode.new, []);
     final hasFocus = useState(focus?.hasFocus ?? false);
@@ -178,30 +207,34 @@ class _Textbox extends HookWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            if (label != null) ...[
-              MenoInputLabel(
-                label!,
-                icon: labelIcon,
-                required: required,
-                enabled: enabled,
-              ),
+        if (label != null || showCounter) ...[
+          Row(
+            children: [
+              if (label != null) ...[
+                MenoInputLabel(
+                  label!,
+                  icon: labelIcon,
+                  required: required,
+                  enabled: enabled,
+                ),
+              ],
+              if (showCounter) ...[
+                const Spacer(),
+                ValueListenableBuilder<TextEditingValue>(
+                  valueListenable: effectiveController,
+                  builder: (context, value, child) {
+                    return MenoInputCounter(
+                      maxLength: maxLength ?? 244,
+                      currentLength: value.text.length,
+                      enabled: hasFocus.value && (!hasError || !isEmpty),
+                    );
+                  },
+                ),
+              ],
             ],
-            const Spacer(),
-            ValueListenableBuilder<TextEditingValue>(
-              valueListenable: effectiveController,
-              builder: (context, value, child) {
-                return MenoInputCounter(
-                  maxLength: maxLength ?? 244,
-                  currentLength: value.text.length,
-                  enabled: hasFocus.value && (!hasError || !isEmpty),
-                );
-              },
-            ),
-          ],
-        ),
-        const SizedBox(height: Insets.sm),
+          ),
+          const SizedBox(height: Insets.sm),
+        ],
         TextFormField(
           autovalidateMode: autovalidateMode,
           style: theme.textStyle,
@@ -214,7 +247,8 @@ class _Textbox extends HookWidget {
           validator: validator,
           focusNode: focus,
           maxLength: maxLength,
-          maxLines: maxLines,
+          maxLines: effectiveMaxLines,
+          minLines: minLines,
           maxLengthEnforcement: MaxLengthEnforcement.enforced,
           keyboardType: keyboardType,
           enabled: enabled,
@@ -224,7 +258,7 @@ class _Textbox extends HookWidget {
             hintText: placeholder,
             fillColor: theme.fillColor,
             filled: !enabled,
-            contentPadding: const EdgeInsets.all(Insets.md),
+            contentPadding: contentPadding,
             counter: const SizedBox(),
             isDense: true,
             border: border,
